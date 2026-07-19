@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171919">
+  <title>Környezet · Photo Prompt Builder</title>
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body data-page="environment">
+  <header class="topbar">
+    <a class="site-title" href="index.html" aria-label="Photo Prompt Builder kezdőlap">
+      <strong><span class="brand-photo">PHOTO</span><span class="brand-amp">&amp;</span><span class="brand-music">MUSIC</span></strong><small>PROMPT BUILDER 2026</small>
+    </a>
+    <section class="page-hero header-page-intro">
+      <p class="kicker">02 - Önálló prompt</p>
+      <h1>Környezet kiválasztása</h1>
+      <p>Tájkép, épített környezet vagy beltér választható, helyszínenként 3-4 egymással összeillő elemmel és fizikailag következetes fényviszonyokkal.</p>
+    </section>
+    <nav class="step-tabs" aria-label="Photo Prompt Builder lépései">
+      <a href="face-generator.html"><span>01</span>Arc</a>
+      <a class="selected" href="environment.html"><span>02</span>Környezet</a>
+      <a href="weather.html"><span>03</span>Időjárás</a>
+      <a href="photo.html"><span>04</span>Fotó</a>
+      <a class="music-tab" href="suno-generator.html"><span>05</span>Zene (Suno)</a>
+    </nav>
+  </header>
+
+  <main class="app-shell">
+    <div class="page-layout">
+      <section class="panel page-panel">
+        <header class="panel-head">
+          <div>
+            <p class="kicker">Környezet</p>
+            <h2>Helyszíntípus és elemek</h2>
+          </div>
+          <button class="button ghost" id="randomEnvironment" type="button">Véletlenszerű táj generálása</button>
+        </header>
+        <div class="environment-mode-tabs" id="environmentModeTabs" role="tablist" aria-label="Környezettípus">
+          <button class="environment-mode-tab selected" type="button" role="tab" aria-selected="true" data-environment-mode="landscape"><span>01</span>Tájkép</button>
+          <button class="environment-mode-tab" type="button" role="tab" aria-selected="false" data-environment-mode="built"><span>02</span>Épített környezet</button>
+          <button class="environment-mode-tab" type="button" role="tab" aria-selected="false" data-environment-mode="interior"><span>03</span>Beltér</button>
+        </div>
+        <div class="environment-mode-options landscape-category-options" id="landscapeCategoryOptions">
+          <div class="built-category-tabs landscape-category-tabs" id="landscapeCategoryTabs" role="tablist" aria-label="Tájkép kategóriája">
+            <button class="built-category-tab selected" type="button" role="tab" aria-selected="true" data-landscape-category="mountain"><span>01</span>Hegyvidék</button>
+            <button class="built-category-tab" type="button" role="tab" aria-selected="false" data-landscape-category="forest"><span>02</span>Erdő és füves táj</button>
+            <button class="built-category-tab" type="button" role="tab" aria-selected="false" data-landscape-category="water"><span>03</span>Vízpart és vizes élőhely</button>
+            <button class="built-category-tab" type="button" role="tab" aria-selected="false" data-landscape-category="arid"><span>04</span>Száraz táj</button>
+            <button class="built-category-tab" type="button" role="tab" aria-selected="false" data-landscape-category="geology"><span>05</span>Jég és földtani táj</button>
+          </div>
+        </div>
+        <div class="environment-mode-options" id="builtEnvironmentOptions" hidden>
+          <div class="built-category-tabs" id="builtCategoryTabs" role="tablist" aria-label="Épített környezet kategóriája">
+            <button class="built-category-tab selected" type="button" role="tab" aria-selected="true" data-built-category="settlement"><span>01</span>Település</button>
+            <button class="built-category-tab" type="button" role="tab" aria-selected="false" data-built-category="transport"><span>02</span>Közlekedés</button>
+            <button class="built-category-tab" type="button" role="tab" aria-selected="false" data-built-category="civic"><span>03</span>Középület</button>
+            <button class="built-category-tab" type="button" role="tab" aria-selected="false" data-built-category="heritage"><span>04</span>Történelmi örökség</button>
+          </div>
+          <label class="field-label" for="customLocation">Konkrét település vagy helyszín</label>
+          <input id="customLocation" type="text" maxlength="180" autocomplete="off" placeholder="Pl. Budapest, Várnegyed vagy Pécs, Széchenyi tér">
+        </div>
+        <details class="image-picker-panel interior-lighting-options" id="interiorLightingOptions" hidden>
+          <summary><b class="weather-section-number" aria-hidden="true">01</b><span>Beltéri fényviszonyok</span></summary>
+          <div class="interior-lighting-content">
+            <p>A külső időjárás csak az ablakfényre és a kinti háttérre hat.</p>
+            <details class="interior-light-picker-panel" name="interior-lighting-picker">
+              <summary><span id="interiorLightSourceHeading">Fő fényforrás</span></summary>
+              <select class="visual-native-select" id="interiorLightSource" aria-label="Fő fényforrás">
+                <option value="window">Ablakon érkező természetes fény</option><option value="ceiling">Mennyezeti általános világítás</option><option value="studio">Stúdiófény / softbox</option><option value="practical">Lámpák és praktikus fényforrások</option><option value="mixed">Kevert természetes és mesterséges fény</option>
+              </select>
+              <div class="interior-light-visual-grid" id="interiorLightSourceGrid"></div>
+            </details>
+            <details class="interior-light-picker-panel" name="interior-lighting-picker">
+              <summary><span id="interiorLightCharacterHeading">Fénykarakter</span></summary>
+              <select class="visual-native-select" id="interiorLightCharacter" aria-label="Fénykarakter">
+                <option value="soft">Lágy, szórt</option><option value="even">Világos, egyenletes</option><option value="directional">Határozott, irányított</option><option value="low_key">Drámai, low-key</option>
+              </select>
+              <div class="interior-light-visual-grid" id="interiorLightCharacterGrid"></div>
+            </details>
+            <details class="interior-light-picker-panel" name="interior-lighting-picker">
+              <summary><span id="interiorColorTemperatureHeading">Színhőmérséklet</span></summary>
+              <select class="visual-native-select" id="interiorColorTemperature" aria-label="Színhőmérséklet">
+                <option value="daylight">Nappali, 5600 K</option><option value="neutral">Semleges, 4000 K</option><option value="warm">Meleg, 3200 K</option><option value="mixed">Kevert színhőmérséklet</option>
+              </select>
+              <div class="interior-light-visual-grid" id="interiorColorTemperatureGrid"></div>
+            </details>
+            <details class="interior-light-picker-panel" name="interior-lighting-picker">
+              <summary><span id="interiorLightDirectionHeading">Ablak / főfény iránya</span></summary>
+              <select class="visual-native-select" id="interiorLightDirection" aria-label="Ablak vagy főfény iránya">
+                <option value="side">Oldalról</option><option value="front">Szemből</option><option value="back">Hátulról</option><option value="top">Felülről</option><option value="none">Nincs meghatározó ablakfény</option>
+              </select>
+              <div class="interior-light-visual-grid" id="interiorLightDirectionGrid"></div>
+            </details>
+          </div>
+        </details>
+        <div class="terrain-grid" id="terrainGrid" aria-label="Tájtípus kiválasztása"></div>
+        <div class="environment-elements-heading">
+          <strong>Helyszín részletei</strong>
+          <small>Egyszerre 0–4 részlet választható.</small>
+        </div>
+        <div class="element-strip" id="environmentElements" aria-label="Környezeti elemek"></div>
+        <section class="special-shot-control" aria-labelledby="specialShotTitle">
+          <div>
+            <strong id="specialShotTitle">Közeli fotó témája</strong>
+            <small id="specialShotHint">Opcionális – a két mód egymást kizárja.</small>
+          </div>
+          <label class="shot-check" id="macroShotOption"><input id="macroShot" type="checkbox"> Makró közeli</label>
+          <label class="shot-check" id="superteleShotOption"><input id="superteleShot" type="checkbox"> Szupertele közeli</label>
+          <input id="specialShotSubject" type="text" maxlength="160" autocomplete="off" placeholder="Téma angolul, pl. a honeybee on lavender" disabled>
+        </section>
+        <section class="crowd-presence-control" aria-labelledby="crowdPresenceTitle">
+          <div class="crowd-presence-heading">
+            <div>
+              <strong id="crowdPresenceTitle">Emberi jelenlét</strong>
+              <small>A modell körüli közösségi élet és háttérszereplők sűrűsége.</small>
+            </div>
+            <label class="crowd-children-toggle" for="includeChildren">
+              <input id="includeChildren" type="checkbox">
+              <span>Gyerekek is legyenek</span>
+            </label>
+          </div>
+          <div class="crowd-presence-options" id="crowdPresenceOptions" role="radiogroup" aria-label="Emberi jelenlét"></div>
+        </section>
+      </section>
+
+      <aside class="side-panel">
+        <section class="scene-preview" id="scenePreview" aria-label="Helyszín előnézet">
+          <img class="scene-image" id="sceneImage" alt="">
+          <div class="scene-placeholder" id="scenePlaceholder" hidden><span>HELYSZÍN</span><strong id="scenePlaceholderTitle">Környezet</strong></div>
+        </section>
+        <section class="summary-panel">
+          <h2>Állapot</h2>
+          <div class="summary-grid" id="summaryGrid"></div>
+        </section>
+        <section class="prompt-box final">
+          <div><strong>Prompt 2 - Környezet</strong><button class="button compact-button action-button action-copy" id="copyPrompt" type="button">Másolás</button></div>
+          <textarea id="pagePrompt" rows="10" readonly spellcheck="false"></textarea>
+          <p id="promptStats">0 szó</p>
+        </section>
+        <div class="page-actions">
+          <a class="button ghost action-button action-back" href="face-generator.html">Vissza</a>
+          <a class="button action-button action-next" href="weather.html">Tovább</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">Másolva</div>
+  <script src="js/prompt-data.js"></script>
+  <script src="js/i18n.js?v=20260718-2"></script>
+  <script src="js/pages.js?v=20260718-5"></script>
+</body>
+</html>

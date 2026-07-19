@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171919">
+  <title>Suno Prompt Builder · Instrumentális zene</title>
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/suno-generator.css">
+</head>
+<body class="suno-page" data-page="suno">
+  <header class="topbar suno-topbar">
+    <a class="site-title" href="index.html" aria-label="Photo & Music Prompt Builder kezdőlap">
+      <strong><span class="brand-photo">PHOTO</span><span class="brand-amp">&amp;</span><span class="brand-music">MUSIC</span></strong><small>PROMPT BUILDER 2026</small>
+    </a>
+    <section class="page-hero header-page-intro">
+      <p class="kicker">Csak instrumentális zenetervező</p>
+      <h1>Történetből zenei dramaturgia.</h1>
+      <p>A műtípus, a téma és a hangulat együtt alakítja a szerkezetet, a hangszerelést és a produkciós karaktert.</p>
+    </section>
+    <nav class="step-tabs suno-main-tabs" aria-label="Photo &amp; Music Prompt Builder lépései">
+      <a href="face-generator.html"><span>01</span>Arc</a>
+      <a href="environment.html"><span>02</span>Környezet</a>
+      <a href="weather.html"><span>03</span>Időjárás</a>
+      <a href="photo.html"><span>04</span>Fotó</a>
+      <a class="music-tab selected" href="suno-generator.html"><span>05</span>Zene (Suno)</a>
+    </nav>
+  </header>
+
+  <main class="app-shell suno-shell">
+    <div class="suno-toolbar" aria-label="Műveletek">
+      <button class="button suno-action-button suno-action-random" id="randomizeSuno" type="button">Véletlenszerű zene generálása</button>
+      <button class="button photo-to-music-button suno-action-button suno-action-music" id="photoToMusic" type="button" disabled title="Előbb készítsd el a teljes fotópromptot a Fotó oldalon.">Fotóból zene</button>
+      <button class="button ghost suno-action-button suno-action-reset" id="resetSuno" type="button">Alaphelyzet</button>
+      <button class="button ghost export-button suno-action-button suno-action-save" id="exportSunoTxt" type="button">TXT mentése</button>
+      <button class="button ghost export-button suno-action-button suno-action-save" id="exportSunoPdf" type="button">PDF mentése</button>
+      <span id="saveStatus" aria-live="polite">Automatikusan mentve</span>
+    </div>
+
+    <div class="page-layout suno-layout">
+      <section class="panel page-panel suno-builder-panel">
+        <details class="suno-section" id="projectSection">
+          <summary><b>01</b><span><strong>Zenei mű típusa</strong><small id="projectSummary"></small></span></summary>
+          <div class="suno-section-body"><div class="suno-option-grid" id="projectGrid"></div></div>
+        </details>
+
+        <details class="suno-section" id="genreSection">
+          <summary><b>02</b><span><strong>Műfaj és zenei nyelv</strong><small id="genreSummary"></small></span></summary>
+          <div class="suno-section-body">
+            <div class="genre-filter-row"><span id="genreFilterInfo">A műtípushoz ajánlott műfajok</span><button id="toggleGenreFilter" type="button" aria-pressed="true">Ajánlottak</button></div>
+            <div class="suno-option-grid compact" id="genreGrid"></div>
+          </div>
+        </details>
+
+        <details class="suno-section" id="themeSection">
+          <summary><b>03</b><span><strong>Narratív téma</strong><small id="themeSummary"></small></span></summary>
+          <div class="suno-section-body"><div class="suno-option-grid compact" id="themeGrid"></div></div>
+        </details>
+
+        <details class="suno-section" id="moodSection">
+          <summary><b>04</b><span><strong>Hangulati ív</strong><small id="moodSummary"></small></span></summary>
+          <div class="suno-section-body"><div class="suno-option-grid compact" id="moodGrid"></div></div>
+        </details>
+
+        <details class="suno-section" id="structureSection">
+          <summary><b>05</b><span><strong>Témához illesztett felépítés</strong><small>Automatikus dramaturgia</small></span></summary>
+          <div class="suno-section-body">
+            <div class="structure-mode-row" id="structureModeGrid"></div>
+            <div class="structure-timeline" id="structureTimeline" aria-label="Zenei szerkezet"></div>
+            <p class="structure-explanation" id="structureExplanation"></p>
+          </div>
+        </details>
+
+        <details class="suno-section" id="soundSection">
+          <summary><b>06</b><span><strong>Hangszerelés és hangzás</strong><small id="soundSummary"></small></span></summary>
+          <div class="suno-section-body">
+            <p class="field-hint">Több hangszerelési réteg is választható.</p>
+            <div class="ensemble-control">
+              <label class="suno-field"><span>Együttes felállása</span><select id="ensembleSelect"></select><small id="ensembleHelp"></small></label>
+            </div>
+            <div class="suno-option-grid compact multi" id="instrumentGrid"></div>
+            <div class="sound-automation-row">
+              <div><strong>Automatikus zenei beállítások</strong><small>A műfaj, a téma, a hangulat és a hangszerek alapján.</small></div>
+              <button id="toggleSoundAutomation" type="button" aria-pressed="true">Bekapcsolva</button>
+            </div>
+            <div class="suno-control-grid" id="sunoControlGrid">
+              <label class="suno-field"><span>Milyen gyors legyen?</span><strong id="tempoValue">96 BPM · közepes</strong><input id="tempoRange" type="range" min="40" max="190" step="1" value="96"><small id="tempoHelp">Nyugodt, jól követhető tempó.</small></label>
+              <label class="suno-field"><span>Hogyan lüktessen?</span><select id="rhythmSelect"></select><small id="rhythmHelp"></small></label>
+              <label class="suno-field"><span>Milyen legyen az alaphangulata?</span><select id="tonalitySelect"></select><small id="tonalityHelp"></small></label>
+              <label class="suno-field"><span>Milyen hosszú legyen?</span><select id="durationSelect"></select><small id="durationHelp"></small></label>
+              <label class="suno-field"><span>Legyen kiemelt hangszeres szóló?</span><select id="soloSelect"></select><small id="soloHelp"></small></label>
+            </div>
+          </div>
+        </details>
+
+        <details class="suno-section" id="productionSection">
+          <summary><b>07</b><span><strong>Produkció és tér</strong><small id="productionSummary"></small></span></summary>
+          <div class="suno-section-body">
+            <div class="suno-option-grid compact" id="productionGrid"></div>
+            <div class="production-audience-control">
+              <label class="suno-field"><span>Közönséghangulat</span><select id="audienceSelect"></select><small id="audienceHelp"></small></label>
+            </div>
+            <label class="custom-direction"><span>Egyéni rendezői megjegyzés</span><textarea id="customDirection" rows="3" maxlength="500" placeholder="Például: a főmotívum a végén csak zongorán térjen vissza…"></textarea></label>
+          </div>
+        </details>
+      </section>
+
+      <aside class="side-panel suno-output-panel">
+        <section class="suno-now-playing" aria-labelledby="currentTitle">
+          <div class="disc" aria-hidden="true"><i></i></div>
+          <div><span>JAVASOLT DALCÍM</span><strong id="currentTitle">The Long Ascent</strong><small id="currentMeta">Filmzene · Cinematic orchestral · 96 BPM</small></div>
+          <button class="suno-action-button suno-action-copy" id="copySongTitle" type="button">Másolás</button>
+        </section>
+
+        <section class="suno-settings-card" aria-labelledby="sunoSettingsTitle">
+          <header><div><span>SUNO BEÁLLÍTÁSOK</span><strong id="sunoSettingsTitle">Automatikus javaslat</strong></div><button class="suno-action-button suno-action-refresh" id="newSongTitle" type="button">Új cím</button></header>
+          <div class="recommended-slider"><header><span>Weirdness</span><strong id="weirdnessValue">35%</strong></header><div><i id="weirdnessBar"></i></div></div>
+          <div class="recommended-slider"><header><span>Style Influence</span><strong id="styleInfluenceValue">70%</strong></header><div><i id="styleInfluenceBar"></i></div></div>
+          <small class="settings-note">Javasolt kezelőfelületi értékek · nem részei a promptnak.</small>
+        </section>
+
+        <section class="suno-meter" aria-label="Dramaturgiai energia">
+          <header><span>ENERGIAÍV</span><strong id="energyLabel">Fokozatos emelkedés</strong></header>
+          <div class="meter-bars" id="energyMeter" aria-hidden="true"></div>
+        </section>
+
+        <section class="prompt-box suno-prompt-box final">
+          <div><strong>Lyrics · Instrumental Structure</strong><button class="suno-action-button suno-action-copy" id="copyBlueprint" type="button">Másolás</button></div>
+          <textarea id="blueprintPrompt" rows="7" readonly></textarea>
+          <small id="blueprintStats"></small>
+        </section>
+
+        <section class="prompt-box suno-prompt-box">
+          <div><strong>Suno Style Prompt</strong><button class="suno-action-button suno-action-copy" id="copyStylePrompt" type="button">Másolás</button></div>
+          <textarea id="stylePrompt" rows="7" maxlength="1000" readonly></textarea>
+          <small id="styleStats"></small>
+        </section>
+
+      </aside>
+    </div>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="js/i18n.js?v=20260718-2"></script>
+  <script src="js/suno-generator.js?v=20260719-2"></script>
+</body>
+</html>

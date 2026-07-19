@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-labelledby="title desc">
+  <title id="title">Photo Prompt Builder 2026</title>
+  <desc id="desc">Kör alakú fotós embléma klasszikus fényképezőgéppel.</desc>
+  <defs>
+    <path id="topArc" d="M7.2 25 A16.8 16.8 0 0 1 40.8 25"/>
+    <path id="bottomArc" d="M6.8 28 A18 18 0 0 0 41.2 28"/>
+  </defs>
+
+  <g fill="none" stroke="#4fc9b7">
+    <circle cx="24" cy="24" r="22.1" stroke-width="1.15"/>
+    <circle cx="24" cy="24" r="19.8" stroke-width="0.55" opacity="0.72"/>
+    <circle cx="24" cy="24" r="14.8" stroke-width="0.65" opacity="0.82"/>
+    <path d="M4.5 23.9h8.7M34.8 23.9h8.7" stroke-width="0.6" opacity="0.65"/>
+  </g>
+
+  <g fill="#4fc9b7" font-family="Georgia, 'Times New Roman', serif" text-anchor="middle">
+    <text font-size="5.15" letter-spacing="0.82"><textPath href="#topArc" startOffset="50%">PHOTO PROMPT</textPath></text>
+    <text font-size="5.2" letter-spacing="1.22"><textPath href="#bottomArc" startOffset="50%">BUILDER</textPath></text>
+    <text x="9.4" y="26" font-family="'TeleNeo Office', Arial, sans-serif" font-size="2.9" letter-spacing="0.25">EST.</text>
+    <text x="38.6" y="26" font-family="'TeleNeo Office', Arial, sans-serif" font-size="2.9" letter-spacing="0.2">2026</text>
+  </g>
+
+  <g fill="none" stroke="#4fc9b7" stroke-linejoin="round">
+    <path d="M18.2 18.2h11.6l1.6 2.1v11.2H16.6V20.3z" stroke-width="0.9"/>
+    <path d="M20.2 18.2v-2h7.6v2M29.7 21.9h1.7M18.1 21.9h1.7" stroke-width="0.72"/>
+    <circle cx="24" cy="26.1" r="4.65" stroke-width="0.85"/>
+    <circle cx="24" cy="26.1" r="3.05" stroke-width="0.6" opacity="0.9"/>
+    <path d="M21.8 23.9 24 26.1l2.25-2.15M26.2 28.3 24 26.1l-2.25 2.15" stroke-width="0.48" opacity="0.65"/>
+  </g>
+  <circle cx="24" cy="26.1" r="0.72" fill="#4fc9b7"/>
+</svg>

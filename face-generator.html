@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171919">
+  <title>Arc · Photo Prompt Builder</title>
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body data-page="face">
+  <header class="topbar">
+    <a class="site-title" href="index.html" aria-label="Photo Prompt Builder kezdőlap">
+      <strong><span class="brand-photo">PHOTO</span><span class="brand-amp">&amp;</span><span class="brand-music">MUSIC</span></strong><small>PROMPT BUILDER 2026</small>
+    </a>
+    <section class="page-hero header-page-intro">
+      <p class="kicker">01 - Önálló prompt</p>
+      <h1>Arc generálása</h1>
+      <p>Marad a meglévő arc-logika: arctípus, kompatibilis anatómiai mezők, haj, smink, mimika és képkivágás.</p>
+    </section>
+    <nav class="step-tabs" aria-label="Photo Prompt Builder lépései">
+      <a class="selected" href="face-generator.html"><span>01</span>Arc</a>
+      <a href="environment.html"><span>02</span>Környezet</a>
+      <a href="weather.html"><span>03</span>Időjárás</a>
+      <a href="photo.html"><span>04</span>Fotó</a>
+      <a class="music-tab" href="suno-generator.html"><span>05</span>Zene (Suno)</a>
+    </nav>
+  </header>
+
+  <main class="app-shell">
+    <div class="page-layout">
+      <section class="panel page-panel">
+        <header class="panel-head">
+          <div>
+            <p class="kicker">Arc</p>
+            <h2>Karakter és portré alap</h2>
+          </div>
+          <div class="panel-head-actions">
+            <button class="button ghost ai-portrait-button" id="randomAiPortrait" type="button">Véletlenszerű AI portré</button>
+            <button class="button ghost ai-portrait-button" id="randomHybridPortrait" type="button">Ember + AI portré</button>
+            <button class="button ghost" id="randomFace" type="button">Véletlenszerű arc generálása</button>
+          </div>
+        </header>
+        <div class="format-row" id="compositionGrid" aria-label="Képformátum kiválasztása"></div>
+        <section class="model-third-control" id="modelThirdControl" aria-labelledby="modelThirdTitle" hidden>
+          <div><strong id="modelThirdTitle">Modell helye a képen</strong><small>Kompozíció a harmadolási szabály szerint.</small></div>
+          <div class="model-third-options" id="modelThirdOptions" role="radiogroup" aria-label="Modell helye a képen"></div>
+        </section>
+        <div class="single-field" id="positionField"></div>
+        <div class="field-groups" id="faceGroups" aria-live="polite"></div>
+      </section>
+
+      <aside class="side-panel">
+        <section class="summary-panel">
+          <h2>Állapot</h2>
+          <div class="summary-grid" id="summaryGrid"></div>
+        </section>
+        <section class="character-save-panel">
+          <h2>Mentett karakterek</h2>
+          <div class="character-save-row">
+            <input id="characterName" type="text" maxlength="60" autocomplete="off" placeholder="Karakter neve">
+            <button class="button compact-button action-button action-save" id="saveCharacter" type="button">Mentés</button>
+          </div>
+          <div class="saved-character-manager">
+            <select id="savedCharacterSelect" aria-label="Mentett karakter kiválasztása">
+              <option value="">- Mentett karakter kiválasztása -</option>
+            </select>
+            <div class="saved-character-actions">
+              <button class="button compact-button" id="loadCharacter" type="button">Betöltés</button>
+              <button class="button ghost compact-button" id="updateCharacter" type="button">Módosítás</button>
+              <button class="button ghost compact-button" id="deleteCharacter" type="button">Törlés</button>
+            </div>
+            <p class="saved-character-empty" id="savedCharacterStatus" aria-live="polite"></p>
+          </div>
+        </section>
+        <section class="prompt-tabs face-prompt-tabs" data-prompt-tabs>
+          <div class="prompt-tab-list" role="tablist" aria-label="Arc prompt változatok">
+            <button class="prompt-tab selected" id="originalFacePromptTab" type="button" role="tab" aria-selected="true" aria-controls="originalFacePromptPanel"><span>01</span>Eredeti arc prompt</button>
+            <button class="prompt-tab" id="aiPortraitPromptTab" type="button" role="tab" aria-selected="false" aria-controls="aiPortraitPromptPanel" tabindex="-1"><span>02</span>AI portré prompt</button>
+          </div>
+
+          <section class="prompt-box final prompt-tab-panel" id="originalFacePromptPanel" role="tabpanel" aria-labelledby="originalFacePromptTab">
+            <div><strong>Prompt 1 - Arc</strong><button class="button compact-button action-button action-copy" id="copyPrompt" type="button">Másolás</button></div>
+            <textarea id="pagePrompt" rows="12" readonly spellcheck="false"></textarea>
+            <p id="promptStats">0 szó</p>
+          </section>
+
+          <section class="prompt-box final ai-portrait-prompt-box prompt-tab-panel" id="aiPortraitPromptPanel" role="tabpanel" aria-labelledby="aiPortraitPromptTab" hidden>
+            <div><strong id="aiPortraitPromptTitle">Önálló AI portré prompt</strong><button class="button compact-button action-button action-copy" id="copyAiPortraitPrompt" type="button">Másolás</button></div>
+            <textarea id="aiPortraitPrompt" rows="12" readonly spellcheck="false" placeholder="A Véletlenszerű AI portré vagy az Ember + AI portré gombbal készíthetsz önálló promptot."></textarea>
+            <p id="aiPortraitPromptStats">0 szó</p>
+          </section>
+        </section>
+        <div class="page-actions face-actions">
+          <button class="button ghost" id="resetAll" type="button">Alaphelyzet</button>
+          <button class="button ghost screen-button" type="button" data-face-background="green" aria-pressed="false">Green screen</button>
+          <button class="button ghost screen-button" type="button" data-face-background="blue" aria-pressed="false">Blue screen</button>
+          <a class="button action-button action-next" href="environment.html">Tovább</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <dialog class="hair-color-dialog" id="hairColorDialog">
+    <form method="dialog">
+      <h2>Melírozott haj színei</h2>
+      <p>Válassz külön alapszínt és festett/melírszínt.</p>
+      <div class="hair-color-pair">
+        <label>Alapszín <input id="hairBaseColor" type="color" value="#3b2416"></label>
+        <label>Festett / melírszín <input id="hairHighlightColor" type="color" value="#b55239"></label>
+      </div>
+      <div class="dialog-actions">
+        <button class="button ghost" value="cancel" type="submit">Mégse</button>
+        <button class="button" id="applyHairColors" value="default" type="submit">Alkalmazás</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">Másolva</div>
+  <script src="js/prompt-data.js"></script>
+  <script src="js/i18n.js?v=20260719-2"></script>
+  <script src="js/pages.js?v=20260719-11"></script>
+</body>
+</html>

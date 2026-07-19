@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171919">
+  <title>Fotó · Photo Prompt Builder</title>
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body data-page="photo">
+  <header class="topbar">
+    <a class="site-title" href="index.html" aria-label="Photo Prompt Builder kezdőlap">
+      <strong><span class="brand-photo">PHOTO</span><span class="brand-amp">&amp;</span><span class="brand-music">MUSIC</span></strong><small>PROMPT BUILDER 2026</small>
+    </a>
+    <section class="page-hero header-page-intro">
+      <p class="kicker">04 - Önálló prompt</p>
+      <h1>Fotó beállítások</h1>
+      <p>A meglévő film, objektív és képi stílus logikája, automatikus záridő-rekesz-ISO javaslattal.</p>
+    </section>
+    <nav class="step-tabs" aria-label="Photo Prompt Builder lépései">
+      <a href="face-generator.html"><span>01</span>Arc</a>
+      <a href="environment.html"><span>02</span>Környezet</a>
+      <a href="weather.html"><span>03</span>Időjárás</a>
+      <a class="selected" href="photo.html"><span>04</span>Fotó</a>
+      <a class="music-tab" href="suno-generator.html"><span>05</span>Zene (Suno)</a>
+    </nav>
+  </header>
+
+  <main class="app-shell">
+    <div class="page-layout">
+      <div class="main-column">
+        <section class="panel page-panel">
+          <header class="panel-head">
+            <div>
+              <p class="kicker">Fotó</p>
+              <h2>Film, objektív, stílus</h2>
+            </div>
+            <button class="button ghost" id="randomPhoto" type="button">Véletlenszerű fotó generálása</button>
+          </header>
+          <div class="control-grid" id="photoFields"></div>
+          <figure class="film-preview" id="filmPreview" aria-label="A kiválasztott filmtípus vizuális előnézete">
+            <div class="film-perforations" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+            <span class="film-edge-code film-edge-code-top" aria-hidden="true">1 0 0</span>
+            <div class="film-frame">
+              <span class="film-cell film-cell-side film-cell-left" aria-hidden="true">
+                <canvas id="filmPreviewLeft" width="960" height="720"></canvas>
+              </span>
+              <span class="film-cell film-cell-main">
+                <canvas id="filmPreviewCanvas" width="960" height="720" aria-label="Filmtípus szerint színezett hegyvidéki referenciafotó"></canvas>
+                <strong class="film-preview-label" id="filmPreviewLabel">Filmtípus</strong>
+                <span class="film-grain" aria-hidden="true"></span>
+              </span>
+              <span class="film-cell film-cell-side film-cell-right" aria-hidden="true">
+                <canvas id="filmPreviewRight" width="960" height="720"></canvas>
+              </span>
+            </div>
+            <div class="film-perforations" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+            <span class="film-edge-code film-edge-code-bottom" aria-hidden="true"><b>4</b><b>5</b><b>6</b></span>
+          </figure>
+        </section>
+
+        <section class="prompt-tabs" data-prompt-tabs>
+          <div class="prompt-tab-list" role="tablist" aria-label="Prompt változatok">
+            <button class="prompt-tab selected" id="fullPromptTab" type="button" role="tab" aria-selected="true" aria-controls="fullPromptPanel"><span>01</span>Teljes prompt</button>
+            <button class="prompt-tab" id="landscapePromptTab" type="button" role="tab" aria-selected="false" aria-controls="landscapePromptPanel" tabindex="-1"><span>02</span>Önálló tájkép prompt</button>
+          </div>
+
+          <section class="prompt-box final full-prompt-box prompt-tab-panel" id="fullPromptPanel" role="tabpanel" aria-labelledby="fullPromptTab">
+            <div>
+              <strong>Teljes összefűzött prompt</strong>
+              <span class="prompt-actions">
+                <button class="button compact-button action-button action-copy" id="copyFullPrompt" type="button">Másolás</button>
+                <button class="button compact-button" id="exportPromptTxt" type="button">TXT</button>
+                <button class="button compact-button" id="exportPromptPdf" type="button">PDF</button>
+              </span>
+            </div>
+            <textarea id="fullPrompt" rows="15" readonly spellcheck="false"></textarea>
+            <p id="fullPromptStats">0 szó</p>
+          </section>
+
+          <section class="prompt-box final landscape-photo-prompt-box prompt-tab-panel" id="landscapePromptPanel" role="tabpanel" aria-labelledby="landscapePromptTab" hidden>
+            <div>
+              <strong id="landscapePhotoPromptTitle">Környezet + időjárás + fotó · önálló tájkép prompt</strong>
+              <span class="prompt-actions">
+                <button class="button compact-button action-button action-copy" id="copyLandscapePhotoPrompt" type="button">Másolás</button>
+                <button class="button compact-button" id="exportLandscapePhotoTxt" type="button">TXT</button>
+                <button class="button compact-button" id="exportLandscapePhotoPdf" type="button">PDF</button>
+              </span>
+            </div>
+            <textarea id="landscapePhotoPrompt" rows="13" readonly spellcheck="false"></textarea>
+            <p id="landscapePhotoPromptStats">0 szó</p>
+          </section>
+        </section>
+      </div>
+
+      <aside class="side-panel">
+        <section class="summary-panel">
+          <h2>Állapot</h2>
+          <div class="summary-grid" id="summaryGrid"></div>
+        </section>
+        <section class="prompt-box final">
+          <div><strong>Prompt 4 - Fotó</strong><button class="button compact-button action-button action-copy" id="copyPrompt" type="button">Másolás</button></div>
+          <textarea id="pagePrompt" rows="11" readonly spellcheck="false"></textarea>
+          <p id="promptStats">0 szó</p>
+        </section>
+        <div class="page-actions">
+          <a class="button ghost action-button action-back" href="weather.html">Vissza</a>
+          <button class="button ghost" id="resetAll" type="button">Alaphelyzet</button>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">Másolva</div>
+  <script src="js/prompt-data.js"></script>
+  <script src="js/i18n.js?v=20260718-2"></script>
+  <script src="js/pages.js?v=20260718-5"></script>
+</body>
+</html>

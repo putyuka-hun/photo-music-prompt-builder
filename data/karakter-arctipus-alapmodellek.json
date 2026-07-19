@@ -1,0 +1,708 @@
+{
+  "schema_version": 1,
+  "asset_root": "assets/karakter_arctipus",
+  "usage_note": "Regional visual reference presets for generated characters. These are prompt helpers, not fixed biological classifications.",
+  "base_model_prompt_suffix": "neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background",
+  "models": [
+    {
+      "sort_order": 1,
+      "id": "amerikai_oslakos",
+      "label": "Amerikai őslakos",
+      "region_group": "Amerika őslakos",
+      "db_altipus_id": "Amerikai őslakos",
+      "db_match": true,
+      "reference_image": "rassz_amerikai_oslakos.png",
+      "visual_anchor_prompt": "native american inspired facial features",
+      "female": {
+        "model_id": "amerikai_oslakos_noi_alapmodell",
+        "label": "Amerikai őslakos női alapmodell",
+        "prompt": "adult woman with native american inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "amerikai_oslakos_ferfi_alapmodell",
+        "label": "Amerikai őslakos férfi alapmodell",
+        "prompt": "adult man with native american inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    },
+    {
+      "sort_order": 2,
+      "id": "arab",
+      "label": "Arab",
+      "region_group": "Közel-Kelet / Észak-Afrika",
+      "db_altipus_id": "Arab",
+      "db_match": true,
+      "reference_image": "rassz_arab.png",
+      "visual_anchor_prompt": "arab inspired facial features",
+      "female": {
+        "model_id": "arab_noi_alapmodell",
+        "label": "Arab női alapmodell",
+        "prompt": "adult woman with arab inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "arab_ferfi_alapmodell",
+        "label": "Arab férfi alapmodell",
+        "prompt": "adult man with arab inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    },
+    {
+      "sort_order": 3,
+      "id": "ausztral_oslakos",
+      "label": "Ausztrál őslakos",
+      "region_group": "Óceánia és csendes-óceáni térség",
+      "db_altipus_id": "Ausztrál őslakos",
+      "db_match": true,
+      "reference_image": "rassz_ausztral_oslakos.png",
+      "visual_anchor_prompt": "aboriginal australian inspired facial features",
+      "female": {
+        "model_id": "ausztral_oslakos_noi_alapmodell",
+        "label": "Ausztrál őslakos női alapmodell",
+        "prompt": "adult woman with aboriginal australian inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "ausztral_oslakos_ferfi_alapmodell",
+        "label": "Ausztrál őslakos férfi alapmodell",
+        "prompt": "adult man with aboriginal australian inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    },
+    {
+      "sort_order": 4,
+      "id": "del_afrikai",
+      "label": "Dél-afrikai",
+      "region_group": "Afrika",
+      "db_altipus_id": "Dél-afrikai",
+      "db_match": true,
+      "reference_image": "rassz_del_afrikai.png",
+      "visual_anchor_prompt": "southern african inspired facial features",
+      "female": {
+        "model_id": "del_afrikai_noi_alapmodell",
+        "label": "Dél-afrikai női alapmodell",
+        "prompt": "adult woman with southern african inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "del_afrikai_ferfi_alapmodell",
+        "label": "Dél-afrikai férfi alapmodell",
+        "prompt": "adult man with southern african inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    },
+    {
+      "sort_order": 5,
+      "id": "del_azsiai",
+      "label": "Dél-ázsiai",
+      "region_group": "Dél-Ázsia",
+      "db_altipus_id": "Dél-ázsiai",
+      "db_match": true,
+      "reference_image": "rassz_del_azsiai.png",
+      "visual_anchor_prompt": "south asian inspired facial features",
+      "female": {
+        "model_id": "del_azsiai_noi_alapmodell",
+        "label": "Dél-ázsiai női alapmodell",
+        "prompt": "adult woman with south asian inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "del_azsiai_ferfi_alapmodell",
+        "label": "Dél-ázsiai férfi alapmodell",
+        "prompt": "adult man with south asian inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    },
+    {
+      "sort_order": 6,
+      "id": "del_europai",
+      "label": "Dél-európai",
+      "region_group": "Európa",
+      "db_altipus_id": "Dél-európai",
+      "db_match": true,
+      "reference_image": "rassz_del_europai.png",
+      "visual_anchor_prompt": "southern european inspired facial features",
+      "female": {
+        "model_id": "del_europai_noi_alapmodell",
+        "label": "Dél-európai női alapmodell",
+        "prompt": "adult woman with southern european inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "del_europai_ferfi_alapmodell",
+        "label": "Dél-európai férfi alapmodell",
+        "prompt": "adult man with southern european inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    },
+    {
+      "sort_order": 7,
+      "id": "delkelet_azsiai",
+      "label": "Délkelet-ázsiai",
+      "region_group": "Délkelet-Ázsia",
+      "db_altipus_id": "Délkelet-ázsiai",
+      "db_match": true,
+      "reference_image": "rassz_delkelet_azsiai.png",
+      "visual_anchor_prompt": "southeast asian inspired facial features",
+      "female": {
+        "model_id": "delkelet_azsiai_noi_alapmodell",
+        "label": "Délkelet-ázsiai női alapmodell",
+        "prompt": "adult woman with southeast asian inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "delkelet_azsiai_ferfi_alapmodell",
+        "label": "Délkelet-ázsiai férfi alapmodell",
+        "prompt": "adult man with southeast asian inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    },
+    {
+      "sort_order": 8,
+      "id": "eszak_europai",
+      "label": "Észak-európai",
+      "region_group": "Európa",
+      "db_altipus_id": "Észak-európai",
+      "db_match": true,
+      "reference_image": "rassz_eszak_europai.png",
+      "visual_anchor_prompt": "northern european inspired facial features",
+      "female": {
+        "model_id": "eszak_europai_noi_alapmodell",
+        "label": "Észak-európai női alapmodell",
+        "prompt": "adult woman with northern european inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "eszak_europai_ferfi_alapmodell",
+        "label": "Észak-európai férfi alapmodell",
+        "prompt": "adult man with northern european inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    },
+    {
+      "sort_order": 9,
+      "id": "inuit",
+      "label": "Inuit",
+      "region_group": "Északi sarkvidék",
+      "db_altipus_id": "Inuit",
+      "db_match": true,
+      "reference_image": "rassz_inuit.png",
+      "visual_anchor_prompt": "inuit inspired facial features",
+      "female": {
+        "model_id": "inuit_noi_alapmodell",
+        "label": "Inuit női alapmodell",
+        "prompt": "adult woman with inuit inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "inuit_ferfi_alapmodell",
+        "label": "Inuit férfi alapmodell",
+        "prompt": "adult man with inuit inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    },
+    {
+      "sort_order": 10,
+      "id": "japan",
+      "label": "Japán",
+      "region_group": "Kelet-Ázsia",
+      "db_altipus_id": "Japán",
+      "db_match": true,
+      "reference_image": "rassz_japan.png",
+      "visual_anchor_prompt": "japanese inspired facial features",
+      "female": {
+        "model_id": "japan_noi_alapmodell",
+        "label": "Japán női alapmodell",
+        "prompt": "adult woman with japanese inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "japan_ferfi_alapmodell",
+        "label": "Japán férfi alapmodell",
+        "prompt": "adult man with japanese inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    },
+    {
+      "sort_order": 11,
+      "id": "karib_neger",
+      "label": "Karibi-néger",
+      "region_group": "Karibi / diaszpóra",
+      "db_altipus_id": "Karibi-néger",
+      "db_match": true,
+      "reference_image": "rassz_karib_neger.png",
+      "visual_anchor_prompt": "afro-caribbean inspired facial features",
+      "female": {
+        "model_id": "karib_neger_noi_alapmodell",
+        "label": "Karibi-néger női alapmodell",
+        "prompt": "adult woman with afro-caribbean inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "karib_neger_ferfi_alapmodell",
+        "label": "Karibi-néger férfi alapmodell",
+        "prompt": "adult man with afro-caribbean inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    },
+    {
+      "sort_order": 12,
+      "id": "kaukazusi",
+      "label": "Kaukázusi",
+      "region_group": "Kaukázus",
+      "db_altipus_id": "Kaukázusi",
+      "db_match": true,
+      "reference_image": "rassz_kaukazusi.png",
+      "visual_anchor_prompt": "caucasus inspired facial features",
+      "female": {
+        "model_id": "kaukazusi_noi_alapmodell",
+        "label": "Kaukázusi női alapmodell",
+        "prompt": "adult woman with caucasus inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "kaukazusi_ferfi_alapmodell",
+        "label": "Kaukázusi férfi alapmodell",
+        "prompt": "adult man with caucasus inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    },
+    {
+      "sort_order": 13,
+      "id": "kelet_afrikai",
+      "label": "Kelet-afrikai",
+      "region_group": "Afrika",
+      "db_altipus_id": "Kelet-afrikai",
+      "db_match": true,
+      "reference_image": "rassz_kelet_afrikai.png",
+      "visual_anchor_prompt": "east african inspired facial features",
+      "female": {
+        "model_id": "kelet_afrikai_noi_alapmodell",
+        "label": "Kelet-afrikai női alapmodell",
+        "prompt": "adult woman with east african inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "kelet_afrikai_ferfi_alapmodell",
+        "label": "Kelet-afrikai férfi alapmodell",
+        "prompt": "adult man with east african inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    },
+    {
+      "sort_order": 14,
+      "id": "kelet_europai",
+      "label": "Kelet-európai",
+      "region_group": "Európa",
+      "db_altipus_id": "Kelet-európai",
+      "db_match": true,
+      "reference_image": "rassz_kelet_europai.png",
+      "visual_anchor_prompt": "eastern european inspired facial features",
+      "female": {
+        "model_id": "kelet_europai_noi_alapmodell",
+        "label": "Kelet-európai női alapmodell",
+        "prompt": "adult woman with eastern european inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "kelet_europai_ferfi_alapmodell",
+        "label": "Kelet-európai férfi alapmodell",
+        "prompt": "adult man with eastern european inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    },
+    {
+      "sort_order": 15,
+      "id": "kinai",
+      "label": "Kínai",
+      "region_group": "Kelet-Ázsia",
+      "db_altipus_id": "Kínai",
+      "db_match": true,
+      "reference_image": "rassz_kinai.png",
+      "visual_anchor_prompt": "chinese inspired facial features",
+      "female": {
+        "model_id": "kinai_noi_alapmodell",
+        "label": "Kínai női alapmodell",
+        "prompt": "adult woman with chinese inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "kinai_ferfi_alapmodell",
+        "label": "Kínai férfi alapmodell",
+        "prompt": "adult man with chinese inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    },
+    {
+      "sort_order": 16,
+      "id": "koreai",
+      "label": "Koreai",
+      "region_group": "Kelet-Ázsia",
+      "db_altipus_id": "Koreai",
+      "db_match": true,
+      "reference_image": "rassz_koreai.png",
+      "visual_anchor_prompt": "korean inspired facial features",
+      "female": {
+        "model_id": "koreai_noi_alapmodell",
+        "label": "Koreai női alapmodell",
+        "prompt": "adult woman with korean inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "koreai_ferfi_alapmodell",
+        "label": "Koreai férfi alapmodell",
+        "prompt": "adult man with korean inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    },
+    {
+      "sort_order": 17,
+      "id": "kozel_keleti",
+      "label": "Közel-keleti",
+      "region_group": "Közel-Kelet / Észak-Afrika",
+      "db_altipus_id": "Közel-keleti",
+      "db_match": true,
+      "reference_image": "rassz_kozel_keleti.png",
+      "visual_anchor_prompt": "middle eastern inspired facial features",
+      "female": {
+        "model_id": "kozel_keleti_noi_alapmodell",
+        "label": "Közel-keleti női alapmodell",
+        "prompt": "adult woman with middle eastern inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "kozel_keleti_ferfi_alapmodell",
+        "label": "Közel-keleti férfi alapmodell",
+        "prompt": "adult man with middle eastern inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    },
+    {
+      "sort_order": 18,
+      "id": "kozep_afrikai",
+      "label": "Közép-afrikai",
+      "region_group": "Afrika",
+      "db_altipus_id": "Közép-afrikai",
+      "db_match": true,
+      "reference_image": "rassz_kozep_afrikai.png",
+      "visual_anchor_prompt": "central african inspired facial features",
+      "female": {
+        "model_id": "kozep_afrikai_noi_alapmodell",
+        "label": "Közép-afrikai női alapmodell",
+        "prompt": "adult woman with central african inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "kozep_afrikai_ferfi_alapmodell",
+        "label": "Közép-afrikai férfi alapmodell",
+        "prompt": "adult man with central african inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    },
+    {
+      "sort_order": 19,
+      "id": "kozep_azsiai",
+      "label": "Közép-ázsiai",
+      "region_group": "Közép-Ázsia / török népek",
+      "db_altipus_id": "Közép-ázsiai",
+      "db_match": true,
+      "reference_image": "rassz_kozep_azsiai.png",
+      "visual_anchor_prompt": "central asian inspired facial features",
+      "female": {
+        "model_id": "kozep_azsiai_noi_alapmodell",
+        "label": "Közép-ázsiai női alapmodell",
+        "prompt": "adult woman with central asian inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "kozep_azsiai_ferfi_alapmodell",
+        "label": "Közép-ázsiai férfi alapmodell",
+        "prompt": "adult man with central asian inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    },
+    {
+      "sort_order": 20,
+      "id": "kozep_europai",
+      "label": "Közép-európai",
+      "region_group": "Európa",
+      "db_altipus_id": "Közép-európai",
+      "db_match": true,
+      "reference_image": "rassz_kozep_europai.png",
+      "visual_anchor_prompt": "central european inspired facial features",
+      "female": {
+        "model_id": "kozep_europai_noi_alapmodell",
+        "label": "Közép-európai női alapmodell",
+        "prompt": "adult woman with central european inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "kozep_europai_ferfi_alapmodell",
+        "label": "Közép-európai férfi alapmodell",
+        "prompt": "adult man with central european inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    },
+    {
+      "sort_order": 21,
+      "id": "mediterran",
+      "label": "Mediterrán",
+      "region_group": "Európa / Mediterrán térség",
+      "db_altipus_id": null,
+      "db_match": false,
+      "reference_image": "rassz_mediterran.png",
+      "visual_anchor_prompt": "mediterranean inspired facial features",
+      "female": {
+        "model_id": "mediterran_noi_alapmodell",
+        "label": "Mediterrán női alapmodell",
+        "prompt": "adult woman with mediterranean inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "mediterran_ferfi_alapmodell",
+        "label": "Mediterrán férfi alapmodell",
+        "prompt": "adult man with mediterranean inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    },
+    {
+      "sort_order": 22,
+      "id": "microneziai",
+      "label": "Micronéziai",
+      "region_group": "Óceánia és csendes-óceáni térség",
+      "db_altipus_id": "Micronéziai",
+      "db_match": true,
+      "reference_image": "rassz_microneziai.png",
+      "visual_anchor_prompt": "micronesian inspired facial features",
+      "female": {
+        "model_id": "microneziai_noi_alapmodell",
+        "label": "Micronéziai női alapmodell",
+        "prompt": "adult woman with micronesian inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "microneziai_ferfi_alapmodell",
+        "label": "Micronéziai férfi alapmodell",
+        "prompt": "adult man with micronesian inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    },
+    {
+      "sort_order": 23,
+      "id": "nyugat_afrikai",
+      "label": "Nyugat-afrikai",
+      "region_group": "Afrika",
+      "db_altipus_id": "Nyugat-afrikai",
+      "db_match": true,
+      "reference_image": "rassz_nyugat_afrikai.png",
+      "visual_anchor_prompt": "west african inspired facial features",
+      "female": {
+        "model_id": "nyugat_afrikai_noi_alapmodell",
+        "label": "Nyugat-afrikai női alapmodell",
+        "prompt": "adult woman with west african inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "nyugat_afrikai_ferfi_alapmodell",
+        "label": "Nyugat-afrikai férfi alapmodell",
+        "prompt": "adult man with west african inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    },
+    {
+      "sort_order": 24,
+      "id": "papua",
+      "label": "Pápua",
+      "region_group": "Óceánia és csendes-óceáni térség",
+      "db_altipus_id": "Pápuai",
+      "db_match": true,
+      "reference_image": "rassz_papua.png",
+      "visual_anchor_prompt": "papuan inspired facial features",
+      "female": {
+        "model_id": "papua_noi_alapmodell",
+        "label": "Pápua női alapmodell",
+        "prompt": "adult woman with papuan inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "papua_ferfi_alapmodell",
+        "label": "Pápua férfi alapmodell",
+        "prompt": "adult man with papuan inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    },
+    {
+      "sort_order": 25,
+      "id": "polineziai",
+      "label": "Polinéziai",
+      "region_group": "Óceánia és csendes-óceáni térség",
+      "db_altipus_id": "Polinéziai",
+      "db_match": true,
+      "reference_image": "rassz_polineziai.png",
+      "visual_anchor_prompt": "polynesian inspired facial features",
+      "female": {
+        "model_id": "polineziai_noi_alapmodell",
+        "label": "Polinéziai női alapmodell",
+        "prompt": "adult woman with polynesian inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "polineziai_ferfi_alapmodell",
+        "label": "Polinéziai férfi alapmodell",
+        "prompt": "adult man with polynesian inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    },
+    {
+      "sort_order": 26,
+      "id": "skandinav",
+      "label": "Skandináv",
+      "region_group": "Európa",
+      "db_altipus_id": null,
+      "db_match": false,
+      "reference_image": "rassz_skandinav.png",
+      "visual_anchor_prompt": "scandinavian inspired facial features",
+      "female": {
+        "model_id": "skandinav_noi_alapmodell",
+        "label": "Skandináv női alapmodell",
+        "prompt": "adult woman with scandinavian inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "skandinav_ferfi_alapmodell",
+        "label": "Skandináv férfi alapmodell",
+        "prompt": "adult man with scandinavian inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    },
+    {
+      "sort_order": 27,
+      "id": "szlav",
+      "label": "Szláv",
+      "region_group": "Európa",
+      "db_altipus_id": null,
+      "db_match": false,
+      "reference_image": "rassz_szlav.png",
+      "visual_anchor_prompt": "slavic inspired facial features",
+      "female": {
+        "model_id": "szlav_noi_alapmodell",
+        "label": "Szláv női alapmodell",
+        "prompt": "adult woman with slavic inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "szlav_ferfi_alapmodell",
+        "label": "Szláv férfi alapmodell",
+        "prompt": "adult man with slavic inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    },
+    {
+      "sort_order": 28,
+      "id": "torok",
+      "label": "Török",
+      "region_group": "Közép-Ázsia / török népek",
+      "db_altipus_id": null,
+      "db_match": false,
+      "reference_image": "rassz_torok.png",
+      "visual_anchor_prompt": "turkish inspired facial features",
+      "female": {
+        "model_id": "torok_noi_alapmodell",
+        "label": "Török női alapmodell",
+        "prompt": "adult woman with turkish inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "torok_ferfi_alapmodell",
+        "label": "Török férfi alapmodell",
+        "prompt": "adult man with turkish inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    },
+    {
+      "sort_order": 29,
+      "id": "ukran",
+      "label": "Ukrán",
+      "region_group": "Európa",
+      "db_altipus_id": null,
+      "db_match": false,
+      "reference_image": "rassz_ukran.png",
+      "visual_anchor_prompt": "ukrainian inspired facial features",
+      "female": {
+        "model_id": "ukran_noi_alapmodell",
+        "label": "Ukrán női alapmodell",
+        "prompt": "adult woman with ukrainian inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "ukran_ferfi_alapmodell",
+        "label": "Ukrán férfi alapmodell",
+        "prompt": "adult man with ukrainian inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    },
+    {
+      "sort_order": 30,
+      "id": "vietnami",
+      "label": "Vietnami",
+      "region_group": "Délkelet-Ázsia",
+      "db_altipus_id": null,
+      "db_match": false,
+      "reference_image": "rassz_vietnami.png",
+      "visual_anchor_prompt": "vietnamese inspired facial features",
+      "female": {
+        "model_id": "vietnami_noi_alapmodell",
+        "label": "Vietnami női alapmodell",
+        "prompt": "adult woman with vietnamese inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "vietnami_ferfi_alapmodell",
+        "label": "Vietnami férfi alapmodell",
+        "prompt": "adult man with vietnamese inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    },
+    {
+      "sort_order": 31,
+      "id": "yoruba",
+      "label": "Yoruba",
+      "region_group": "Afrika",
+      "db_altipus_id": null,
+      "db_match": false,
+      "reference_image": "rassz_yoruba.png",
+      "visual_anchor_prompt": "yoruba inspired facial features",
+      "female": {
+        "model_id": "yoruba_noi_alapmodell",
+        "label": "Yoruba női alapmodell",
+        "prompt": "adult woman with yoruba inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "yoruba_ferfi_alapmodell",
+        "label": "Yoruba férfi alapmodell",
+        "prompt": "adult man with yoruba inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    },
+    {
+      "sort_order": 32,
+      "id": "balkani",
+      "label": "Balkáni",
+      "region_group": "Európa",
+      "db_altipus_id": null,
+      "db_match": false,
+      "reference_image": "rassz_balkani.png",
+      "visual_anchor_prompt": "balkan inspired facial features",
+      "female": {
+        "model_id": "balkani_noi_alapmodell",
+        "label": "Balkáni női alapmodell",
+        "prompt": "adult woman with balkan inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "balkani_ferfi_alapmodell",
+        "label": "Balkáni férfi alapmodell",
+        "prompt": "adult man with balkan inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    },
+    {
+      "sort_order": 33,
+      "id": "baltikumi",
+      "label": "Baltikumi",
+      "region_group": "Európa",
+      "db_altipus_id": null,
+      "db_match": false,
+      "reference_image": "rassz_baltikumi.png",
+      "visual_anchor_prompt": "baltic inspired facial features",
+      "female": {
+        "model_id": "baltikumi_noi_alapmodell",
+        "label": "Baltikumi női alapmodell",
+        "prompt": "adult woman with baltic inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "baltikumi_ferfi_alapmodell",
+        "label": "Baltikumi férfi alapmodell",
+        "prompt": "adult man with baltic inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    },
+    {
+      "sort_order": 34,
+      "id": "gruz",
+      "label": "Grúz",
+      "region_group": "Kaukázus",
+      "db_altipus_id": null,
+      "db_match": false,
+      "reference_image": "rassz_gruz.png",
+      "visual_anchor_prompt": "georgian inspired facial features",
+      "female": {
+        "model_id": "gruz_noi_alapmodell",
+        "label": "Grúz női alapmodell",
+        "prompt": "adult woman with georgian inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "gruz_ferfi_alapmodell",
+        "label": "Grúz férfi alapmodell",
+        "prompt": "adult man with georgian inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    },
+    {
+      "sort_order": 35,
+      "id": "ormeny",
+      "label": "Örmény",
+      "region_group": "Kaukázus",
+      "db_altipus_id": null,
+      "db_match": false,
+      "reference_image": "rassz_ormeny.png",
+      "visual_anchor_prompt": "armenian inspired facial features",
+      "female": {
+        "model_id": "ormeny_noi_alapmodell",
+        "label": "Örmény női alapmodell",
+        "prompt": "adult woman with armenian inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      },
+      "male": {
+        "model_id": "ormeny_ferfi_alapmodell",
+        "label": "Örmény férfi alapmodell",
+        "prompt": "adult man with armenian inspired facial features, neutral expression, direct gaze, simple black crew-neck shirt, centered studio portrait, soft even light, plain grey background"
+      }
+    }
+  ]
+}

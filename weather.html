@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171919">
+  <title>Időjárás · Photo Prompt Builder</title>
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body data-page="weather">
+  <header class="topbar">
+    <a class="site-title" href="index.html" aria-label="Photo Prompt Builder kezdőlap">
+      <strong><span class="brand-photo">PHOTO</span><span class="brand-amp">&amp;</span><span class="brand-music">MUSIC</span></strong><small>PROMPT BUILDER 2026</small>
+    </a>
+    <section class="page-hero header-page-intro">
+      <p class="kicker">03 - Önálló prompt</p>
+      <h1>Időjárás, fény, emberi hatás</h1>
+      <p>Évszak, eleje-közepe-vége, napállás, időjárás, hőérzet, testreakció és öltözet egy külön promptban.</p>
+    </section>
+    <nav class="step-tabs" aria-label="Photo Prompt Builder lépései">
+      <a href="face-generator.html"><span>01</span>Arc</a>
+      <a href="environment.html"><span>02</span>Környezet</a>
+      <a class="selected" href="weather.html"><span>03</span>Időjárás</a>
+      <a href="photo.html"><span>04</span>Fotó</a>
+      <a class="music-tab" href="suno-generator.html"><span>05</span>Zene (Suno)</a>
+    </nav>
+  </header>
+
+  <main class="app-shell">
+    <div class="page-layout">
+      <section class="panel page-panel">
+        <header class="panel-head">
+          <div>
+            <p class="kicker">Időjárás és fény</p>
+            <h2>Évszak, napállás, emberi reakció</h2>
+          </div>
+          <button class="button ghost" id="randomWeather" type="button">Véletlenszerű időjárás generálása</button>
+        </header>
+
+        <details class="image-picker-panel weather-visual-panel">
+          <summary><b class="weather-section-number" aria-hidden="true">01</b><span id="seasonHeading">Évszak</span></summary>
+          <div class="weather-panel-content">
+            <select class="visual-native-select" id="seasonSelect" aria-label="Évszak"></select>
+            <div class="season-visual-grid" id="seasonGrid"></div>
+          </div>
+        </details>
+
+        <details class="image-picker-panel weather-visual-panel">
+          <summary><b class="weather-section-number" aria-hidden="true">02</b><span id="phaseHeading">Évszak szakasza · hónapok</span></summary>
+          <div class="weather-panel-content">
+            <select class="visual-native-select" id="phaseSelect" aria-label="Évszak szakasza">
+              <option value="early">Eleje</option>
+              <option value="mid">Közepe</option>
+              <option value="late">Vége</option>
+            </select>
+            <div class="phase-calendar" id="phaseCalendar"></div>
+          </div>
+        </details>
+
+        <details class="image-picker-panel weather-visual-panel">
+          <summary><b class="weather-section-number" aria-hidden="true">03</b><span id="weatherHeading">Időjárás</span></summary>
+          <div class="weather-panel-content">
+            <select class="visual-native-select" id="weatherSelect" aria-label="Időjárás"></select>
+            <div class="weather-visual-grid" id="weatherGrid"></div>
+          </div>
+        </details>
+
+        <details class="image-picker-panel weather-visual-panel">
+          <summary><b class="weather-section-number" aria-hidden="true">03A</b><span id="specialWeatherHeading">Speciális légköri jelenségek</span></summary>
+          <div class="weather-panel-content">
+            <div class="weather-visual-grid" id="specialWeatherGrid"></div>
+          </div>
+        </details>
+
+        <details class="image-picker-panel weather-visual-panel" id="windPanel">
+          <summary><b class="weather-section-number" aria-hidden="true">03B</b><span id="windHeading">Szél és légmozgás</span></summary>
+          <div class="weather-panel-content">
+            <div class="weather-visual-grid" id="windGrid"></div>
+          </div>
+        </details>
+
+        <details class="image-picker-panel weather-visual-panel" id="windDirectionPanel">
+          <summary><b class="weather-section-number" aria-hidden="true">03C</b><span id="windDirectionHeading">Szélirány</span></summary>
+          <div class="weather-panel-content">
+            <div class="wind-direction-grid" id="windDirectionGrid" role="radiogroup" aria-label="Szélirány"></div>
+          </div>
+        </details>
+
+        <section class="weather-control-block time-control-block" aria-labelledby="timeHeading">
+          <div class="weather-control-heading"><span>04</span><strong id="timeHeading">Napszak · 0–24 óra</strong></div>
+          <div class="time-panel" id="timePanel">
+          <div class="time-copy"><strong id="timeLabel">12:00</strong><span id="sunLabel">Napállás számítása</span></div>
+          <input id="timeSlider" type="range" min="0" max="24" step="0.5" value="12" aria-label="Napszak beállítása">
+          <div class="time-scale" aria-hidden="true"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
+          </div>
+        </section>
+
+        <details class="image-picker-panel weather-visual-panel" id="outdoorLightPanel">
+          <summary><b class="weather-section-number" aria-hidden="true">05</b><span id="lightHeading">Fényirány</span></summary>
+          <div class="weather-panel-content">
+            <select class="visual-native-select" id="lightDirectionSelect" aria-label="Fényirány"></select>
+            <div class="light-direction-grid" id="lightDirectionGrid"></div>
+          </div>
+        </details>
+
+        <section class="weather-control-block temperature-control" aria-labelledby="temperatureHeading">
+          <div class="weather-control-heading"><span>06</span><strong id="temperatureHeading">Hőérzet korrekció</strong></div>
+          <div class="temperature-readout">
+            <span id="averageTemperatureLabel">Környezeti átlag: –</span>
+            <strong id="temperatureValue">– °C</strong>
+            <span id="temperatureCorrectionLabel">Korrekció: 0 °C</span>
+          </div>
+          <input id="temperatureOffset" type="range" min="-8" max="8" step="1" value="0" aria-label="Hőérzet korrekció">
+          <div class="temperature-scale" aria-hidden="true"><span>−8 °C</span><span>átlag</span><span>+8 °C</span></div>
+        </section>
+
+        <div class="outfit-control"><label class="field-label" for="customOutfit">Egyéni öltözet</label><input id="customOutfit" type="text" maxlength="180" autocomplete="off" placeholder="Automatikus, ha üres"></div>
+      </section>
+
+      <aside class="side-panel">
+        <section class="scene-preview" id="scenePreview" aria-label="Fény előnézet">
+          <img class="scene-image" id="sceneImage" alt="">
+          <div class="scene-placeholder" id="scenePlaceholder" hidden><span>HELYSZÍN</span><strong id="scenePlaceholderTitle">Környezet</strong></div>
+        </section>
+        <section class="summary-panel">
+          <h2>Állapot</h2>
+          <div class="summary-grid" id="summaryGrid"></div>
+        </section>
+        <section class="prompt-box final">
+          <div><strong>Prompt 3 - Időjárás és fény</strong><button class="button compact-button action-button action-copy" id="copyPrompt" type="button">Másolás</button></div>
+          <textarea id="pagePrompt" rows="11" readonly spellcheck="false"></textarea>
+          <p id="promptStats">0 szó</p>
+        </section>
+        <div class="page-actions">
+          <a class="button ghost action-button action-back" href="environment.html">Vissza</a>
+          <a class="button action-button action-next" href="photo.html">Tovább</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">Másolva</div>
+  <script src="js/prompt-data.js"></script>
+  <script src="js/i18n.js?v=20260718-2"></script>
+  <script src="js/pages.js?v=20260719-10"></script>
+</body>
+</html>
