@@ -3724,6 +3724,12 @@
           <div class="face-image-grid" id="face-images-${key}" data-face-image-picker="${key}"></div>
         </details>
       `;
+      const panel = wrapper.querySelector(".image-picker-panel");
+      const summary = panel?.querySelector(":scope > summary");
+      summary?.addEventListener("click", (event) => {
+        event.preventDefault();
+        panel.open = !panel.open;
+      });
     } else {
       wrapper.innerHTML = `<label for="face-${key}">${label}</label><select id="face-${key}" data-face-key="${key}"></select>`;
     }

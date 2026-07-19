@@ -441,7 +441,7 @@ body .prompt-box button {
 }
 
 body[data-page="face"] .image-picker-panel summary::after {
-  display: none;
+  display: grid;
 }
 
 /* Biztonságos alkotási munkafolyamat: előzmények, zárolások, ellenőrzés. */
