@@ -387,7 +387,7 @@ body .prompt-box button {
   right: 22px;
   z-index: 20;
   display: inline-grid;
-  grid-template-columns: repeat(2, 42px);
+  grid-template-columns: repeat(2, 58px);
   gap: 2px;
   padding: 3px;
   border: 1px solid rgba(79, 201, 183, 0.28);
@@ -403,6 +403,19 @@ body .prompt-box button {
   font: 700 12px/1 var(--font-ui, Arial, sans-serif);
   letter-spacing: 0.08em;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.language-switcher button img {
+  width: 22px;
+  height: 15px;
+  display: block;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.28);
 }
 
 .language-switcher button:hover {
@@ -441,7 +454,13 @@ body .prompt-box button {
 }
 
 body[data-page="face"] .image-picker-panel summary::after {
-  display: grid;
+  display: none !important;
+  content: none;
+}
+
+body[data-page="face"] .image-picker-panel.is-disabled > summary {
+  opacity: 0.58;
+  cursor: not-allowed;
 }
 
 /* Biztonságos alkotási munkafolyamat: előzmények, zárolások, ellenőrzés. */

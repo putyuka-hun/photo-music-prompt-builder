@@ -3610,7 +3610,11 @@
     const selectedValues = MULTI_FACE_KEYS.has(key)
       ? new Set(Array.isArray(state.face[key]) ? state.face[key].map(String) : [])
       : new Set(select.value ? [select.value] : []);
-    if (panel) panel.classList.toggle("has-value", selectedValues.size > 0);
+    if (panel) {
+      panel.classList.toggle("has-value", selectedValues.size > 0);
+      panel.classList.toggle("is-disabled", disabled);
+      panel.setAttribute("aria-disabled", String(disabled));
+    }
     if (summary) {
       const selectedText = Array.from(selectedValues).join(", ");
       const colorText = key === "hajszin" && selectedValues.has("Melírozott / többszínű")
@@ -3728,12 +3732,38 @@
       const summary = panel?.querySelector(":scope > summary");
       summary?.addEventListener("click", (event) => {
         event.preventDefault();
+        const select = panel?.querySelector(`[data-face-key="${key}"]`);
+        if (select?.disabled) {
+          panel.open = false;
+          showToast(facePanelUnavailableReason(key));
+          return;
+        }
         panel.open = !panel.open;
       });
     } else {
       wrapper.innerHTML = `<label for="face-${key}">${label}</label><select id="face-${key}" data-face-key="${key}"></select>`;
     }
     return wrapper;
+  }
+
+  function facePanelUnavailableReason(key) {
+    if (MAKEUP_KEYS.includes(key) && faceValue("identitas") !== "Nő") {
+      return "Ez a mező csak női identitásnál használható.";
+    }
+    if (key === "arcszorzet" && faceValue("identitas") === "Nő") {
+      return "Az arcszőrzet csak férfi identitásnál használható.";
+    }
+    const hairStyle = faceValue("hajstilus");
+    if (["hajszin", "hajhossz", "hajsuruseg"].includes(key) && hairStyle.startsWith("Kopasz")) {
+      return "Kopasz frizuránál ez a hajmező nem használható.";
+    }
+    if (key === "hajhossz" && (hairStyle.includes("géppel nyírt") || hairStyle.includes("buzz cut"))) {
+      return "Géppel nyírt frizuránál a hajhossz automatikus.";
+    }
+    if (!faceValue("altipus") && DEPENDENT_FIELDS.some(([fieldKey]) => fieldKey === key)) {
+      return "Előbb válassz embertípust.";
+    }
+    return "A panel a jelenlegi beállításokkal nem használható.";
   }
 
   function renderFaceGroups() {
@@ -5401,16 +5431,33 @@
     elements.scenePreview.dataset.wind = state.windKey;
     elements.scenePreview.dataset.windDirection = state.windDirectionKey;
     elements.scenePreview.dataset.time = daypartForTime().key === "night" ? "night" : "day";
-    if (elements.sceneImage) {
-      elements.sceneImage.src = state.environmentMode === "landscape"
-        ? terrainImagePath(state.terrainId)
-        : `assets/environment/${state.environmentMode}/${state.terrainId}.webp`;
+    const showEmptyPreview = () => {
+      if (elements.sceneImage) {
+        elements.sceneImage.hidden = true;
+        elements.sceneImage.alt = "";
+      }
+      if (elements.scenePlaceholder) elements.scenePlaceholder.hidden = false;
+      if (elements.scenePlaceholderTitle) elements.scenePlaceholderTitle.textContent = "Nincs téma kiválasztva";
+    };
+    if (!elements.sceneImage || !state.terrainId) {
+      showEmptyPreview();
+      return;
+    }
+    const previewSource = state.environmentMode === "landscape"
+      ? terrainImagePath(state.terrainId)
+      : `assets/environment/${state.environmentMode}/${state.terrainId}.webp`;
+    elements.sceneImage.onload = () => {
+      elements.sceneImage.hidden = false;
       elements.sceneImage.alt = state.environmentMode === "landscape"
         ? `${terrain().label} tájkép`
         : `${terrain().label} helyszín-előnézet`;
-    }
-    if (elements.scenePlaceholder) elements.scenePlaceholder.hidden = true;
-    if (elements.scenePlaceholderTitle) elements.scenePlaceholderTitle.textContent = terrain().label;
+      if (elements.scenePlaceholder) elements.scenePlaceholder.hidden = true;
+    };
+    elements.sceneImage.onerror = showEmptyPreview;
+    elements.sceneImage.hidden = true;
+    if (elements.scenePlaceholder) elements.scenePlaceholder.hidden = false;
+    if (elements.scenePlaceholderTitle) elements.scenePlaceholderTitle.textContent = "Nincs téma kiválasztva";
+    elements.sceneImage.src = previewSource;
   }
 
   function updateTimeUi() {

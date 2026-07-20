@@ -10,8 +10,8 @@
   let changingLanguage = false;
 
   const EN = {
-    "Időjárás és fény": "Weather and light", "Mellkép közel": "Close bust portrait",
-    "Arc": "Face", "Környezet": "Environment", "Időjárás": "Weather", "Fotó": "Photo", "Zene (Suno)": "Music (Suno)", "Portré": "Portrait", "Négyzet": "Square",
+    "Időjárás és fény": "Weather and light", "Mellkép közel": "Close bust portrait", "Portré fej-nyak vállal": "Head-and-shoulders portrait", "Félalak": "Half-length portrait", "Ez a mező csak női identitásnál használható.": "This field is available only for a female identity.", "Az arcszőrzet csak férfi identitásnál használható.": "Facial hair is available only for a male identity.", "Kopasz frizuránál ez a hajmező nem használható.": "This hair field is unavailable with a bald hairstyle.", "Géppel nyírt frizuránál a hajhossz automatikus.": "Hair length is automatic with a buzz cut.", "Előbb válassz embertípust.": "Select a person type first.", "A panel a jelenlegi beállításokkal nem használható.": "This panel is unavailable with the current settings.",
+    "Arc": "Face", "Környezet": "Environment", "Időjárás": "Weather", "Fotó": "Photo", "Zene (Suno)": "Music (Suno)", "Portré": "Portrait", "Négyzet": "Square", "Nincs téma kiválasztva": "No subject selected",
     "Önálló prompt": "Standalone prompt", "Arc generálása": "Face generator", "Környezet kiválasztása": "Environment selection",
     "Időjárás, fény, emberi hatás": "Weather, light and human impact", "Fotó beállítások": "Photo settings",
     "Karakter és portré alap": "Character and portrait foundation", "Helyszíntípus és elemek": "Location type and elements",
@@ -40,7 +40,7 @@
     "Haj és részletek": "Hair and details", "frizura és arcszőrzet": "hairstyle and facial hair", "Tekintet és mimika": "Gaze and expression", "nézésirány és arckifejezés": "gaze direction and facial expression",
     "Karakter arctípusa": "Character archetype", "Életkor": "Age", "Identitás": "Identity", "Testalkat": "Body type", "Koponya": "Face shape", "Járomcsont": "Cheekbones", "Állkapocs": "Jaw", "Bőrtónus": "Skin tone", "Szemforma": "Eye shape", "Ajkak": "Lips",
     "Homlok": "Forehead", "Szemöldök formája": "Eyebrow shape", "Szemöldök sűrűsége": "Eyebrow density", "Szempilla": "Eyelashes", "Szemszín": "Eye color", "Írisz": "Iris",
-    "Fülek": "Ears", "Orr": "Nose", "Fogak": "Teeth", "Arcjegyek": "Facial features", "Bőrtextúra": "Skin texture", "Szemfestés": "Eye makeup", "Bőr alapozása": "Foundation", "Ajak színe / rúzs": "Lip color / lipstick",
+    "Fülek": "Ears", "Orr": "Nose", "Fogak": "Teeth", "Arcjegyek": "Facial features", "Bőrtextúra": "Skin texture", "Szemfestés": "Eye makeup", "Bőr alapozása": "Foundation", "Ajak színe / rúzs": "Lip color / lipstick", "Almaarc (teltebb felső orcák)": "Apple cheeks (full upper cheeks)", "Gödröcskés orca": "Cheek dimples", "Szeplős orr- és arctáj": "Freckles across nose and cheeks",
     "Hajszín": "Hair color", "Hajhossz": "Hair length", "Haj sűrűsége": "Hair density", "Hajstílus": "Hairstyle", "Arcszőrzet": "Facial hair", "Tekintet": "Gaze", "Arckifejezés": "Expression", "Pozíció": "Pose",
     "Férfi": "Male", "Nő": "Female", "Mentett karakterek": "Saved characters", "Karakter neve": "Character name", "Mentés": "Save", "Betöltés": "Load", "Módosítás": "Update", "Törlés": "Delete",
     "Mentett karakter kiválasztása": "Select saved character", "- Mentett karakter kiválasztása -": "- Select saved character -", "Még nincs mentett karakter": "No saved characters yet", "Eredeti arc prompt": "Original face prompt", "AI portré prompt": "AI portrait prompt", "Önálló AI portré prompt": "Standalone AI portrait prompt",
@@ -213,7 +213,7 @@
     switcher.className = "language-switcher";
     switcher.setAttribute("role", "group");
     switcher.setAttribute("aria-label", "Nyelv / Language");
-    switcher.innerHTML = '<button type="button" data-language="hu">HU</button><button type="button" data-language="en">EN</button>';
+    switcher.innerHTML = '<button type="button" data-language="hu" aria-label="Magyar"><img src="assets/ui/flag-hu.svg" alt="" aria-hidden="true"><span>HU</span></button><button type="button" data-language="en" aria-label="English"><img src="assets/ui/flag-en.svg" alt="" aria-hidden="true"><span>EN</span></button>';
     switcher.addEventListener("click", (event) => {
       const button = event.target.closest("[data-language]");
       if (button) setLanguage(button.dataset.language);
