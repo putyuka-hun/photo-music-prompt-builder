@@ -7852,7 +7852,7 @@ window.PROMPT_GENERATOR_DATA = {
     },
     {
       "tekintet_id": "Vak",
-      "tekintet_prompt": "blank gaze, unfocused eyes, clouded eyes, eyes closed, head turned towards the sound"
+      "tekintet_prompt": "blind, naturally unfocused gaze, subtly clouded corneas, eyes open, head gently oriented toward sound"
     }
   ],
   "tbl_wb": [
