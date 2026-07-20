@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#171919">
   <meta name="description" content="Photo & Music Prompt Builder bilingual user guide">
   <title>Útmutató · Photo & Music Prompt Builder</title>
-  <link rel="stylesheet" href="css/app.css?v=20260720-5">
+  <link rel="stylesheet" href="css/app.css?v=20260720-6">
 </head>
 <body data-page="guide">
   <header class="topbar">
@@ -51,7 +51,12 @@
             <li>Állítsd be az arcformát, bőrtónust, szemet, hajat és arckifejezést.</li>
             <li>A rendszer csak a választásokkal összeegyeztethető mezőket engedi használni.</li>
             <li>A sminkmezők női, az arcszőrzet férfi karakter esetén aktív.</li>
-            <li>A kész karaktert elmentheted és később újra betöltheted.</li>
+            <li>A <strong>Véletlenszerű AI portré</strong> önálló, mesterségesen összeállított karaktert készít. Az <strong>Ember + AI portré</strong> emberi alapokat és kreatív AI-részleteket kombinál, a <strong>Véletlenszerű arc generálása</strong> pedig a hagyományos arcmezőket tölti ki.</li>
+            <li>A kész karaktert névvel elmentheted. A listából később betöltheted, módosíthatod vagy törölheted.</li>
+            <li>Az <strong>Eredeti arc prompt</strong> a kézzel kiválasztott mezőkből épül fel. Az <strong>AI portré prompt</strong> a két AI-portrégomb eredményét mutatja.</li>
+            <li>A <strong>Másolás</strong> gomb az aktív prompt teljes szövegét a vágólapra helyezi.</li>
+            <li>Az <strong>Alaphelyzet</strong> törli az aktuális arcbeállításokat. A <strong>Green screen</strong> és <strong>Blue screen</strong> egyszínű hátteret kér a karakter mögé.</li>
+            <li>A <strong>Tovább</strong> gombbal a Környezet oldalra léphetsz; a kiválasztott karakter adatai megmaradnak.</li>
           </ol>
         </article>
 
@@ -60,7 +65,13 @@
           <ol>
             <li>Válassz tájat, épített környezetet vagy belteret.</li>
             <li>Jelöld ki a helyszínt és legfeljebb négy részletet.</li>
+            <li>A <strong>Közeli téma</strong> opcionális: belső tárgyat, anyagot vagy építészeti részletet emelhetsz ki. Válassz <strong>makró közelképet</strong> vagy <strong>szupertelefotós közelképet</strong>; a két mód egyszerre nem használható.</li>
+            <li>A közeli téma rövid leírását angolul add meg, például: <em>carved stone ornament</em>.</li>
+            <li>Beltéri helyszínnél megjelenik a <strong>Beltéri fényviszonyok</strong> panel. Beállíthatod a fő fényforrást, a fény karakterét, a színhőmérsékletet és az ablak vagy főfény irányát.</li>
+            <li>A fő fényforrás lehet természetes ablakfény, mennyezeti világítás, stúdiófény, praktikus lámpafény vagy kevert fény. A külső időjárás ilyenkor csak az ablakfényre és a kinti háttérre hat.</li>
             <li>Az emberi jelenlét a helyszínhez illő embereket veszi figyelembe.</li>
+            <li>Az <strong>Emberi jelenlét</strong> résznél választhatsz: nincs ember, egy ember, kis csoport, közösség vagy tömeg.</li>
+            <li>A <strong>Gyermekek is legyenek</strong> jelölőnégyzet engedélyezésével gyermekek is megjelenhetnek a jelenetben; ember nélküli beállításnál a kapcsoló nem aktív.</li>
             <li>Ha nincs ember a jelenetben, a modell képen belüli helyzete nem befolyásolja a promptot.</li>
           </ol>
         </article>
@@ -77,9 +88,13 @@
         <article class="guide-card">
           <h2>4. Fotó</h2>
           <ol>
-            <li>Válassz képarányt, kameranézetet, objektívet, mélységélességet és vizuális stílust.</li>
+            <li>Válassz képarányt, kameranézetet, objektívet és mélységélességet.</li>
+            <li>A sokféle <strong>analóg filmminta</strong> között színes és fekete-fehér készletek is vannak, például CineStill, Fujifilm, Ilford és Kodak filmek. A film karakterét szabadon kombinálhatod az objektív típusával és a képi megjelenítés stílusával.</li>
+            <li>A választható képi stílusok: akvarell és vonalrajz, barokk festmény, ceruza, cinematic, concept art, cyberpunk, digitális festmény, fantasy art, fotórealisztikus fekete-fehér, futurista, gouache, GTA V, impresszionizmus, Leonardo da Vinci, linómetszet, low-poly 3D, marker, minimalista, noir, olajfesték, pasztell, pixel art, retro/vintage, rézkarc és metszet, South Park, stippling, szénrajz, szürrealista, tusrajz, vektorgrafika és vízfesték.</li>
+            <li>A film, az objektív és a stílus együtt alakítja a kész prompt tónusát, térérzetét, részletességét és vizuális karakterét.</li>
             <li>Ellenőrizd az összes korábbi választást az állapotpanelen.</li>
-            <li>Másold ki a kész fotópromptot a kívánt képgenerátorhoz.</li>
+            <li>A <strong>Fotóprompt</strong> a teljes jelenetet írja le, a <strong>Csak háttér / önálló tájprompt</strong> pedig szereplő nélkül készíti el ugyanannak a környezetnek a leírását.</li>
+            <li>Az elkészült promptokat kimásolhatod a kívánt képgenerátorhoz, valamint <strong>TXT</strong> vagy <strong>PDF</strong> formátumban is exportálhatod.</li>
           </ol>
         </article>
 
@@ -133,7 +148,12 @@
             <li>Define face shape, skin tone, eyes, hair, and expression.</li>
             <li>The system only enables fields compatible with your selections.</li>
             <li>Makeup is available for female characters; facial hair for male characters.</li>
-            <li>Save a finished character and load it again later.</li>
+            <li><strong>Random AI portrait</strong> creates an independently assembled AI character. <strong>Human + AI portrait</strong> combines human foundations with creative AI details, while <strong>Generate random face</strong> fills the standard face fields.</li>
+            <li>Save a finished character under a name. You can later load, update, or delete it from the saved-character list.</li>
+            <li><strong>Original face prompt</strong> is built from your manual field selections. <strong>AI portrait prompt</strong> displays the result created by either AI portrait button.</li>
+            <li><strong>Copy</strong> places the complete active prompt on the clipboard.</li>
+            <li><strong>Reset</strong> clears the current face settings. <strong>Green screen</strong> and <strong>Blue screen</strong> request a solid-color background behind the character.</li>
+            <li>Use <strong>Next</strong> to continue to Environment while keeping the selected character data.</li>
           </ol>
         </article>
 
@@ -142,7 +162,13 @@
           <ol>
             <li>Choose landscape, built environment, or interior.</li>
             <li>Select a location and up to four supporting details.</li>
+            <li><strong>Close-up subject</strong> is optional and can highlight an interior object, material, or architectural detail. Choose either <strong>Macro close-up</strong> or <strong>Supertelephoto close-up</strong>; the two modes are mutually exclusive.</li>
+            <li>Describe the close-up subject briefly in English, for example: <em>carved stone ornament</em>.</li>
+            <li>Interior locations reveal the <strong>Interior lighting</strong> panel. Set the main light source, light character, color temperature, and the direction of the window or key light.</li>
+            <li>The main source can be natural window light, ceiling light, studio light, practical fixtures, or mixed light. Outdoor weather then affects only window light and the exterior background.</li>
             <li>Human presence uses people appropriate to the selected location.</li>
+            <li>Under <strong>Human presence</strong>, choose no people, one person, a small group, a community, or a crowd.</li>
+            <li>Enable <strong>Include children</strong> when children may appear in the scene. This option remains unavailable when no people are selected.</li>
             <li>When no person is present, subject alignment does not affect the prompt.</li>
           </ol>
         </article>
@@ -159,9 +185,13 @@
         <article class="guide-card">
           <h2>4. Photo</h2>
           <ol>
-            <li>Choose aspect ratio, camera view, lens, depth of field, and visual style.</li>
+            <li>Choose aspect ratio, camera view, lens, and depth of field.</li>
+            <li>The extensive <strong>analogue film stock</strong> selection includes both colour and black-and-white options, with examples from CineStill, Fujifilm, Ilford, and Kodak. Combine any film character with the lens type and visual rendering style.</li>
+            <li>Available visual styles include watercolor with linework, Baroque painting, pencil, cinematic, concept art, cyberpunk, digital painting, fantasy art, photorealistic black and white, futuristic, gouache, GTA V, Impressionism, Leonardo da Vinci, linocut, low-poly 3D, marker, minimalist, noir, oil painting, pastel, pixel art, retro/vintage, etching and engraving, South Park, stippling, charcoal, surrealist, ink drawing, vector art, and watercolor.</li>
+            <li>Film stock, lens, and style work together to shape the final prompt's tone, spatial character, detail, and overall visual identity.</li>
             <li>Review earlier selections in the status panel.</li>
-            <li>Copy the completed photo prompt into your preferred image generator.</li>
+            <li>The <strong>Photo prompt</strong> describes the complete scene, while <strong>Background only / Standalone landscape prompt</strong> creates the same environment without a person or foreground subject.</li>
+            <li>Copy either completed prompt into your preferred image generator, or export the result as a <strong>TXT</strong> or <strong>PDF</strong> file.</li>
           </ol>
         </article>
 
@@ -197,4 +227,3 @@
   <script src="js/i18n.js?v=20260720-6"></script>
 </body>
 </html>
-
