@@ -10,6 +10,7 @@
   let changingLanguage = false;
 
   const EN = {
+    "Időjárás és fény": "Weather and light", "Mellkép közel": "Close bust portrait",
     "Arc": "Face", "Környezet": "Environment", "Időjárás": "Weather", "Fotó": "Photo", "Zene (Suno)": "Music (Suno)", "Portré": "Portrait", "Négyzet": "Square",
     "Önálló prompt": "Standalone prompt", "Arc generálása": "Face generator", "Környezet kiválasztása": "Environment selection",
     "Időjárás, fény, emberi hatás": "Weather, light and human impact", "Fotó beállítások": "Photo settings",
@@ -118,6 +119,12 @@
     if (language === "hu" || !text.trim()) return text;
     if (EN[text]) return EN[text];
     if (auto.has(text)) return auto.get(text);
+    const dashedSection = text.match(/^(\d+[A-Z]?)\s*-\s*(.+)$/);
+    if (dashedSection) return `${dashedSection[1]} - ${translate(dashedSection[2])}`;
+    const historyStatus = text.match(/^(\d+)\/(\d+) állapot$/);
+    if (historyStatus) return `${historyStatus[1]}/${historyStatus[2]} states`;
+    const historyEntry = text.match(/^(\d+)\. állapot(?:\s*·\s*legújabb)?$/);
+    if (historyEntry) return `${historyEntry[1]}. state${text.includes("legújabb") ? " · latest" : ""}`;
     const numbered = text.match(/^(\d+[A-Z]?)\s*[.]\s*(.+)$/);
     if (numbered) return `${numbered[1]} · ${translate(numbered[2])}`;
     const promptTitle = text.match(/^Prompt (\d+) - (.+)$/);
