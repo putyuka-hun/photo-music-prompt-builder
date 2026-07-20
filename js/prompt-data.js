@@ -4154,7 +4154,7 @@ window.PROMPT_GENERATOR_DATA = {
     },
     {
       "arcszorzet_id": "Kockabajusz",
-      "arcszorzet_prompt": "cube mustache / square-shaped mustache, straight cut edges, boxy thick form",
+      "arcszorzet_prompt": "toothbrush mustache, compact dense rectangular patch directly under the nose, ending well before the mouth corners",
       "enabled": true
     },
     {
@@ -4174,7 +4174,7 @@ window.PROMPT_GENERATOR_DATA = {
     },
     {
       "arcszorzet_id": "Pajesz",
-      "arcszorzet_prompt": "mutton chops",
+      "arcszorzet_prompt": "prominent long sideburns",
       "enabled": true
     },
     {
