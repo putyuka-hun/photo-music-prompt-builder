@@ -1429,8 +1429,8 @@
   });
   const LIGHT_DIRECTION_VISUALS = {
     front: "feny_szembol.png",
-    front_left: "feny_bal_45.png",
-    front_right: "feny_jobb_45.png",
+    front_left: "feny_jobb_45.png",
+    front_right: "feny_bal_45.png",
     side: "feny_oldal.png",
     back: "feny_hatulrol.png",
     top: "feny_felulrol.png"
