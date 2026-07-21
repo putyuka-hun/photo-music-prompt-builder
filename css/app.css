@@ -4470,6 +4470,15 @@ body[data-page="weather"] .weather-image-card img {
   object-position: center;
 }
 
+/* Keep the 45-degree lighting pair visually identical except for its direction. */
+body[data-page="weather"] .light-image-card.light-direction-front_right img {
+  transform: scaleX(-1) scale(1.13);
+}
+
+body[data-page="weather"] .light-image-card.light-direction-front_right:hover img {
+  transform: scaleX(-1) scale(1.16);
+}
+
 body[data-page="face"] .face-image-button > .visual-card-label,
 body[data-page="weather"] .weather-image-card > span {
   position: absolute;

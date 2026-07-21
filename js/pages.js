@@ -1430,7 +1430,7 @@
   const LIGHT_DIRECTION_VISUALS = {
     front: "feny_szembol.png",
     front_left: "feny_jobb_45.png",
-    front_right: "feny_bal_45.png",
+    front_right: "feny_jobb_45.png",
     side: "feny_oldal.png",
     back: "feny_hatulrol.png",
     top: "feny_felulrol.png"
@@ -4362,7 +4362,7 @@
     elements.lightDirectionGrid.innerHTML = rows.map((row) => {
       const selected = row.direction_key === state.lightDirectionKey;
       const image = LIGHT_DIRECTION_VISUALS[row.direction_key] || LIGHT_DIRECTION_VISUALS.front;
-      return `<button class="weather-image-card light-image-card${selected ? " selected" : ""}" type="button" data-light-direction-key="${row.direction_key}" aria-pressed="${selected}">
+      return `<button class="weather-image-card light-image-card light-direction-${row.direction_key}${selected ? " selected" : ""}" type="button" data-light-direction-key="${row.direction_key}" aria-pressed="${selected}">
         <img src="${WEATHER_IMAGE_FOLDER}/${image}" alt="" loading="lazy" decoding="async">
         <span><strong>${row.label}</strong></span>
       </button>`;
