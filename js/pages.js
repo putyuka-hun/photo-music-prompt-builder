@@ -1177,8 +1177,8 @@
   const MAX_LENS_EFFECTS = 1;
   const LENS_LIGHT_EFFECTS = [
     { key: "lens_flare", labelHu: "Lens flare", labelEn: "Lens flare", hintHu: "Természetes lencsebecsillanás látható vagy egyértelműen indokolt erős fényforrásból.", hintEn: "Natural lens flare from a visible or strongly motivated bright light source.", prompt: "subtle physically plausible lens flare from a visible or strongly motivated light source, controlled contrast, no oversized artificial flare" },
-    { key: "anamorphic_flare", labelHu: "Anamorf flare", labelEn: "Anamorphic flare", hintHu: "Visszafogott vízszintes filmes fénycsík erős gyakorlati fények mentén.", hintEn: "Restrained horizontal cinematic light streak aligned with bright practical lights.", prompt: "restrained horizontal anamorphic lens flare aligned with bright practical lights, cinematic optical streak, no excessive science-fiction glow" },
-    { key: "sunstar", labelHu: "Fénycsillag", labelEn: "Sunstar", hintHu: "Csillagszerű diffrakciós sugarak kis, intenzív fényforrásokon.", hintEn: "Star-shaped diffraction rays on small, intense light sources.", prompt: "natural aperture starburst on small intense light sources, crisp diffraction rays, physically plausible exposure" },
+    { key: "anamorphic_flare", labelHu: "Anamorf flare", labelEn: "Anamorphic flare", hintHu: "Visszafogott vízszintes filmes fénycsík erős gyakorlati fények mentén, anamorf jellegű streak szűrőhatással.", hintEn: "Restrained horizontal cinematic light streak aligned with bright practical lights, using an anamorphic-style streak filter effect.", prompt: "restrained horizontal anamorphic-style streak-filter flare aligned with bright practical lights, cinematic optical streak, no excessive science-fiction glow" },
+    { key: "sunstar", labelHu: "Fénycsillag", labelEn: "Sunstar", hintHu: "Csillagszerű diffrakciós sugarak kis, intenzív fényforrásokon, szűk rekesszel.", hintEn: "Star-shaped diffraction rays on small, intense light sources, created with a stopped-down aperture.", prompt: "natural stopped-down aperture starburst on small intense light sources, crisp diffraction rays, physically plausible exposure" },
     { key: "light_leak", labelHu: "Fényszivárgás", labelEn: "Light leak", hintHu: "Finom analóg fényszivárgás a kép egyik szélén, meleg organikus elszíneződéssel.", hintEn: "Subtle analogue light leak near one frame edge with warm organic colour bleed.", prompt: "subtle analogue film light leak near one frame edge, organic warm colour bleed, restrained coverage" },
     { key: "halation", labelHu: "Halation", labelEn: "Halation", hintHu: "Finom vöröses filmes fényudvar az erős csúcsfények körül.", hintEn: "Subtle warm reddish film halo around intense highlights.", prompt: "subtle film halation around intense highlights, fine warm reddish glow without loss of detail" },
     { key: "bloom", labelHu: "Bloom", labelEn: "Bloom", hintHu: "Lágyan ragyogó csúcsfények, megőrzött középtónusokkal és részletekkel.", hintEn: "Softly glowing highlights with preserved midtones and critical detail.", prompt: "gentle highlight bloom with soft luminous roll-off, preserved midtone contrast and critical subject detail" },
@@ -1262,7 +1262,7 @@
     "Akvarell+vonal": "transparent watercolor washes over confident hand-drawn ink contours, visible cold-pressed paper grain, selective color blooms, varied line weight, reserved highlights, airy negative space",
     "Barokk festmény": "17th-century baroque oil painting, theatrical chiaroscuro, deep warm shadows, luminous flesh and fabric, rich umber and gold palette, layered glazing, dynamic diagonal composition, ornate but believable detail",
     "Ceruza": "observational graphite drawing, precise contour construction, layered hatching and cross-hatching, soft graphite gradients, visible tooth of drawing paper, controlled highlights lifted with an eraser",
-    "Cinematic": "cinematic live-action frame, motivated practical lighting, natural production design, controlled color grade, realistic contrast roll-off, deliberate blocking and composition, subtle filmic halation, framing consistent with the selected aspect ratio",
+    "Cinematic": "cinematic live-action frame, motivated practical lighting, natural production design, controlled color grade, realistic contrast roll-off, deliberate blocking and composition, framing consistent with the selected aspect ratio",
     "Concept Art": "professional production concept art, clearly resolved environment and subject design, painterly value grouping, readable silhouette, atmospheric depth, purposeful color script, presentation-ready keyframe rather than a rough draft",
     "Cyberpunk": "grounded cyberpunk visual language, rain-wet urban materials, layered neon signage glow, cyan-magenta light separation, dense lived-in technology, volumetric haze, high contrast without crushed detail",
     "Digitális festmény": "high-end digital painting, natural textured brushes, layered painterly edges, hand-shaped color transitions, controlled detail density, subtle canvas-like surface, no airbrushed plastic finish",
@@ -1281,7 +1281,7 @@
     "Olajfesték": "traditional oil painting, layered wet-on-wet and glazed passages, visible bristle marks, rich pigment depth, selective impasto on highlights, convincing canvas texture, carefully modeled form",
     "Pasztell": "soft pastel drawing, velvety dry pigment, broken color layering, blended gradients beside crisp pastel accents, toned paper showing through, powdery edge texture, luminous matte color",
     "Pixel art": "hand-authored pixel art, deliberate limited palette, crisp pixel clusters, readable silhouette, selective dithering, consistent sprite-scale detail, no anti-aliasing, no vector-smooth edges",
-    "Retro / Vintage": "authentic mid-century analog photograph, era-appropriate muted palette, gently faded dyes, modest contrast, organic film grain, slight lens softness and halation, believable age without heavy fake damage",
+    "Retro / Vintage": "authentic mid-century analog photograph, era-appropriate muted palette, gently faded dyes, modest contrast, organic film grain, slight period-appropriate lens softness, believable age without heavy fake damage",
     "Rézkarc / metszet": "traditional copperplate etching and engraving, dense precise cross-hatching, tapered burin lines, fine stippled transitions, ivory rag-paper texture, antique ink impression, disciplined tonal construction",
     "South Park": "flat paper-cutout television-cartoon aesthetic, simple geometric characters, bold black outlines, minimal flat shading, bright limited colors, deliberately crude layered-paper construction, simplified background shapes",
     "Stippling": "hand-drawn stippling illustration, form modeled entirely with varied dot density, crisp contour restraint, clean white paper, patient high-detail tonal transitions, no smeared shading",
@@ -3389,10 +3389,17 @@
   function optionLabel(field, row, type = "face") {
     const [key, , , valueKey, labelKey] = field;
     if (type === "face") return clean(row[valueKey]);
-    if (key === "film") return clean(row.filmtipus_id);
+    if (key === "film") return filmDisplayName(row);
     if (key === "objektiv") return clean(row.objektiv);
     if (key === "stilus") return clean(row.stilus);
     return clean(row[labelKey] || row[valueKey]);
+  }
+
+  function filmDisplayName(film) {
+    const name = clean(film?.filmtipus_id);
+    if (!filmIsBlackAndWhite(film)) return name;
+    const suffix = window.I18N?.language === "en" ? "B/W – black and white" : "B/W – fekete-fehér";
+    return `${name} (${suffix})`;
   }
 
   function orderedFaceRows(field, rows) {
@@ -4402,6 +4409,10 @@
     return database.tbl_filmtipus || [];
   }
 
+  function filmIsBlackAndWhite(film) {
+    return /black and white/i.test(clean(film?.filmtipus_prompt));
+  }
+
   function allowedLensNamesForTerrain() {
     if (state.specialShotMode === "macro") return new Set(["Makró"]);
     if (state.specialShotMode === "supertele") return new Set(["Szupertele"]);
@@ -4495,7 +4506,7 @@
       : (isEnglish ? "No optical effect" : "Nincs optikai effektus");
     elements.lensEffectDialogText.textContent = effect
       ? (isEnglish ? effect.hintEn : effect.hintHu)
-      : (isEnglish ? "Natural, clean optical rendering without flare, light leaks, ghosting, or artificial glow." : "Természetes, tiszta optikai kép becsillanás, fényszivárgás, ghosting és mesterséges ragyogás nélkül.");
+      : (isEnglish ? "Natural, clean optical rendering without an added stylized optical effect." : "Természetes, tiszta optikai kép hozzáadott stilizált optikai effektus nélkül.");
     elements.lensEffectDialog.showModal();
   }
 
@@ -4543,7 +4554,8 @@
     if (filmName) {
       const filmLine = document.createElement("span");
       filmLine.className = "film-label-stock";
-      filmLine.textContent = filmName;
+      const filmField = PHOTO_FIELDS.find(([key]) => key === "film");
+      filmLine.textContent = filmDisplayName(findRow(filmField, filmName)) || filmName;
       elements.filmPreviewLabel.appendChild(filmLine);
     }
     if (lensName) {
@@ -5214,6 +5226,18 @@
     return match ? Number(match[1]) : null;
   }
 
+  function filmPromptForContext(film, { standalone = false } = {}) {
+    const prompt = clean(film?.filmtipus_prompt);
+    if (!prompt) return "";
+    if (standalone) {
+      return prompt
+        .replace(/^low-light portrait photography\b/i, "low-light landscape photography")
+        .replace(/^portrait photography\b/i, "landscape photography")
+        .replace(/\bsoft skin tones\b/i, "soft warm color rendering");
+    }
+    return prompt.replace(/^landscape photography\b/i, "environmental portrait photography");
+  }
+
   function formatShutter(seconds) {
     if (seconds >= 1) return `${Number(seconds.toFixed(1)).toLocaleString("hu-HU")} s`;
     return `1/${Math.round(1 / seconds)} s`;
@@ -5231,11 +5255,12 @@
     const iso = selectedFilmIso() || (ev < 0 ? 1600 : ev < 7 ? 800 : ev < 12 ? 400 : 100);
     const automaticAperture = ev >= 14 ? 8 : ev >= 11 ? 5.6 : ev >= 8 ? 4 : ev >= 5 ? 2.8 : ev >= 1 ? 2 : 1.8;
     const preferredAperture = LENS_APERTURE_TARGETS[compatibleLensName()] || automaticAperture;
-    const targetAperture = ev < 5 ? Math.min(preferredAperture, 2.8) : ev < 9 ? Math.min(preferredAperture, 4) : preferredAperture;
+    const sunstarSelected = selectedLensEffects().some((effect) => effect.key === "sunstar");
+    const targetAperture = sunstarSelected ? 11 : ev < 5 ? Math.min(preferredAperture, 2.8) : ev < 9 ? Math.min(preferredAperture, 4) : preferredAperture;
     const exactSeconds = (targetAperture ** 2) / ((2 ** ev) * (iso / 100));
     const seconds = SHUTTER_SPEEDS.reduce((closest, value) => Math.abs(value - exactSeconds) < Math.abs(closest - exactSeconds) ? value : closest);
     const rawAperture = Math.sqrt(seconds * (2 ** ev) * (iso / 100));
-    const aperture = APERTURES.reduce((closest, value) => Math.abs(value - rawAperture) < Math.abs(closest - rawAperture) ? value : closest);
+    const aperture = sunstarSelected ? 11 : APERTURES.reduce((closest, value) => Math.abs(value - rawAperture) < Math.abs(closest - rawAperture) ? value : closest);
     const daypart = daypartForTime().key;
     const kelvin = state.environmentMode === "interior"
       ? ({ warm: 3200, neutral: 4000, daylight: 5600, mixed: 4300 })[state.interiorColorTemperature] || 5600
@@ -5530,10 +5555,10 @@
       ? "strong telephoto compression, selected model as the unequivocal primary focus, tack-sharp eyes and natural facial detail, controlled background defocus with retained organic terrain texture, no synthetic blur"
       : LENS_RENDERING_PROFILES[lensName];
     const effectPrompts = selectedLensEffects().map((effect) => effect.prompt);
-    if (!effectPrompts.length) effectPrompts.push("natural clean optical rendering, no lens flare, no light leak, no optical ghosting, no artificial glow");
+    if (!effectPrompts.length) effectPrompts.push("natural clean optical rendering, no added stylized optical effect");
     return sanitizePrompt([
       camera.prompt,
-      film?.filmtipus_prompt,
+      filmPromptForContext(film, { standalone }),
       LENS_BASE_PROMPTS[lensName] || lens?.leiras,
       lensRendering,
       ...effectPrompts,
@@ -6691,7 +6716,9 @@
       renderTerrainGrid();
       renderEnvironmentElements();
       renderCrowdPresenceOptions();
+      renderPhotoSelects();
       renderLensEffects();
+      updateFilmPreviewLabel();
       renderSummary();
       window.I18N?.apply(document.body);
     });
