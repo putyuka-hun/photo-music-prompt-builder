@@ -1228,8 +1228,34 @@
     "Tilt-shift": 8,
     "Zoom": 5.6
   };
+  const LENS_MAX_APERTURES = {
+    "Halszemoptika": 2.8,
+    "Halszemoptika fekete kerettel": 3.5,
+    "Makró": 2.8,
+    "Nagylátószögű": 2.8,
+    "Portré": 1.8,
+    "Prime": 1.8,
+    "Standard": 2,
+    "Szupertele": 4,
+    "Teleobjektív": 2.8,
+    "Tilt-shift": 2.8,
+    "Zoom": 2.8
+  };
+  const LENS_PORTRAIT_SHUTTER_LIMITS = {
+    "Halszemoptika": 1 / 30,
+    "Halszemoptika fekete kerettel": 1 / 30,
+    "Makró": 1 / 125,
+    "Nagylátószögű": 1 / 30,
+    "Portré": 1 / 60,
+    "Prime": 1 / 60,
+    "Standard": 1 / 60,
+    "Szupertele": 1 / 500,
+    "Teleobjektív": 1 / 250,
+    "Tilt-shift": 1 / 60,
+    "Zoom": 1 / 125
+  };
   const LENS_BASE_PROMPTS = {
-    "Halszemoptika": "full-frame fisheye lens, approximately 12mm",
+    "Halszemoptika": "diagonal full-frame fisheye lens, approximately 12mm, edge-to-edge rectangular image coverage, image fills the complete selected frame, no circular image boundary, no black corners, no black border",
     "Halszemoptika fekete kerettel": "circular fisheye lens, approximately 8mm, natural black image circle",
     "Makró": "true 1:1 macro lens, approximately 100mm",
     "Nagylátószögű": "rectilinear ultra-wide-angle lens, approximately 16mm",
@@ -1242,7 +1268,7 @@
     "Zoom": "professional 24-70mm zoom lens, photographed near 55mm"
   };
   const LENS_RENDERING_PROFILES = {
-    "Halszemoptika": "authentic fisheye projection, deep depth of field, crisp foreground and clearly resolved distant background, natural optical edge softness",
+    "Halszemoptika": "authentic diagonal full-frame fisheye projection with edge-to-edge rectangular coverage, complete frame filled without a circular boundary or black corners, deep depth of field, crisp foreground and clearly resolved distant background, natural optical edge softness",
     "Halszemoptika fekete kerettel": "authentic circular fisheye projection inside a natural black image circle, deep depth of field, detailed foreground and background",
     "Makró": "true macro magnification, critical subject detail, naturally shallow depth of field caused by close focus, organic optical bokeh with believable background texture",
     "Nagylátószögű": "deep focus wide-angle rendering, sharp foreground, midground and distant landscape, realistic atmospheric perspective, no artificial background blur",
@@ -1257,7 +1283,7 @@
   const PHOTO_REALISM_PROMPT = "photorealistic optical rendering, lifelike natural microcontrast, fine organic surface texture, realistic skin pores and material response, restrained sharpening, smooth natural tonal transitions, no waxy or plastic skin, no over-smoothing, no synthetic bokeh, no CGI look, no artificial HDR halos";
   const NATURE_REALISM_PROMPT = "photorealistic optical rendering, lifelike natural microcontrast, fine organic surface and material texture, physically plausible light response, restrained sharpening, smooth natural tonal transitions, no waxy or plastic surfaces, no over-smoothing, no synthetic bokeh, no CGI look, no artificial HDR halos";
   const ARTWORK_QUALITY_PROMPT = "coherent composition, intentional material texture, controlled edges, consistent light direction, clear focal hierarchy, no generic plastic 3D finish, no accidental photorealistic skin";
-  const PHOTOGRAPHIC_STYLE_NAMES = new Set(["Cinematic", "Fotó-realisztikus B/W", "Noir", "Retro / Vintage"]);
+  const PHOTOGRAPHIC_STYLE_NAMES = new Set(["Cinematic", "Fotó-realisztikus B/W", "Noir", "Retro / Vintage", "Szépia"]);
   const STYLE_PROMPTS = {
     "Akvarell+vonal": "transparent watercolor washes over confident hand-drawn ink contours, visible cold-pressed paper grain, selective color blooms, varied line weight, reserved highlights, airy negative space",
     "Barokk festmény": "17th-century baroque oil painting, theatrical chiaroscuro, deep warm shadows, luminous flesh and fabric, rich umber and gold palette, layered glazing, dynamic diagonal composition, ornate but believable detail",
@@ -1282,6 +1308,7 @@
     "Pasztell": "soft pastel drawing, velvety dry pigment, broken color layering, blended gradients beside crisp pastel accents, toned paper showing through, powdery edge texture, luminous matte color",
     "Pixel art": "hand-authored pixel art, deliberate limited palette, crisp pixel clusters, readable silhouette, selective dithering, consistent sprite-scale detail, no anti-aliasing, no vector-smooth edges",
     "Retro / Vintage": "authentic mid-century analog photograph, era-appropriate muted palette, gently faded dyes, modest contrast, organic film grain, slight period-appropriate lens softness, believable age without heavy fake damage",
+    "Szépia": "authentic sepia-toned silver-gelatin black and white photograph, traditional darkroom sulphide toning, warm brown image silver with creamy paper highlights, restrained archival print contrast, organic monochrome grain, no modern color-filter look",
     "Rézkarc / metszet": "traditional copperplate etching and engraving, dense precise cross-hatching, tapered burin lines, fine stippled transitions, ivory rag-paper texture, antique ink impression, disciplined tonal construction",
     "South Park": "flat paper-cutout television-cartoon aesthetic, simple geometric characters, bold black outlines, minimal flat shading, bright limited colors, deliberately crude layered-paper construction, simplified background shapes",
     "Stippling": "hand-drawn stippling illustration, form modeled entirely with varied dot density, crisp contour restraint, clean white paper, patient high-detail tonal transitions, no smeared shading",
@@ -1353,6 +1380,7 @@
     "Pasztell": { saturation: 0.82, contrast: 0.8, gamma: 1.16, channels: [1.06, 1.02, 1.08], offsets: [10, 8, 12], posterize: 30, grain: 2.2, vignette: 0.02 },
     "Pixel art": { saturation: 1.2, contrast: 1.22, gamma: 0.96, posterize: 12, pixelSize: 9, grain: 0, vignette: 0 },
     "Retro / Vintage": { saturation: 0.78, contrast: 0.92, gamma: 1.08, channels: [1.12, 1.03, 0.86], offsets: [8, 4, -5], grain: 4.5, vignette: 0.22 },
+    "Szépia": { monochrome: true, saturation: 0, contrast: 1.1, gamma: 1.03, channels: [1.18, 1.04, 0.78], offsets: [12, 5, -10], grain: 4.2, vignette: 0.18 },
     "Rézkarc / metszet": { monochrome: true, contrast: 1.2, gamma: 1.02, channels: [1.12, 1.02, 0.82], offsets: [10, 5, -5], edgeMode: "light", edgeStrength: 4.8, grain: 2.2, vignette: 0.1 },
     "South Park": { saturation: 1.32, contrast: 1.18, gamma: 1, posterize: 7, edgeStrength: 0.58, grain: 0, vignette: 0 },
     "Stippling": { monochrome: true, contrast: 1.18, gamma: 1.04, edgeStrength: 0.46, grain: 8.5, vignette: 0.04 },
@@ -2897,6 +2925,10 @@
     if (state.environmentMode === "interior" && state.specialShotMode === "supertele") add("warning", "Beltéri objektívütközés", "A szupertele mód beltérben nem használható, ezért automatikusan kikapcsol.");
     if (state.photo.objektiv && !allowedLensNamesForTerrain().has(state.photo.objektiv)) add("warning", "Objektívütközés", "A kiválasztott objektív nem illik a jelenlegi helyszínhez.");
     if (!state.photo.objektiv) add("info", "Automatikus objektívjavaslat", `A helyszínhez ajánlott tartományból választható objektív; számított expozíció: ${camera.prompt}.`);
+    const filmField = PHOTO_FIELDS.find(([key]) => key === "film");
+    const selectedFilm = findRow(filmField, state.photo.film);
+    if (selectedFilm && !filmLightCompatibility(selectedFilm).allowed) add("warning", "Film és fényviszony ütközése", "A kiválasztott film névleges érzékenységén nem ad reális expozíciót a szükséges záridő mellett.");
+    if (!availableFilmRows().some((film) => filmLightCompatibility(film).allowed)) add("warning", "Nincs használható analóg film", "A rendszer filmsemleges automatikus fotópromptot készít biztonságos záridővel és számított ISO-val.");
 
     const outfitText = normalizePromptText(state.customOutfit);
     if (temperature >= 28 && /coat|jacket|warm layer|teli kabat|vastag kabat/.test(outfitText)) add("warning", "Öltözet és hőmérséklet", `${temperature > 0 ? "+" : ""}${temperature} °C mellett a megadott öltözet túl meleg lehet.`);
@@ -4413,6 +4445,46 @@
     return /black and white/i.test(clean(film?.filmtipus_prompt));
   }
 
+  function filmIsoValue(filmName) {
+    if (FILM_ISO_VALUES[filmName]) return FILM_ISO_VALUES[filmName];
+    const match = clean(filmName).match(/(\d{2,4})(?:T)?$/i);
+    return match ? Number(match[1]) : null;
+  }
+
+  function portraitShutterLimitSeconds(lensName = compatibleLensName() || "Standard") {
+    let limit = LENS_PORTRAIT_SHUTTER_LIMITS[lensName] || 1 / 60;
+    if (state.environmentMode !== "interior") {
+      const windIndex = WIND_LEVELS.findIndex((item) => item.key === state.windKey);
+      const moderateIndex = WIND_LEVELS.findIndex((item) => item.key === "moderate");
+      const strongIndex = WIND_LEVELS.findIndex((item) => item.key === "strong");
+      if (windIndex >= strongIndex) limit = Math.min(limit, 1 / 125);
+      else if (windIndex >= moderateIndex) limit = Math.min(limit, 1 / 60);
+    }
+    return limit;
+  }
+
+  function filmLightCompatibility(film) {
+    if (state.photo.stilus === "Szépia" && !filmIsBlackAndWhite(film)) {
+      return { allowed: false, reason: "style", requiredSeconds: 0, limitSeconds: portraitShutterLimitSeconds(), iso: filmIsoValue(film?.filmtipus_id) };
+    }
+    const iso = filmIsoValue(film?.filmtipus_id);
+    if (!iso) return { allowed: true, reason: "", requiredSeconds: 0, limitSeconds: portraitShutterLimitSeconds() };
+    const ev = sceneExposureEv();
+    const lensName = compatibleLensName() || "Standard";
+    const sunstarSelected = selectedLensEffects().some((effect) => effect.key === "sunstar");
+    const aperture = sunstarSelected ? 11 : (LENS_MAX_APERTURES[lensName] || 2.8);
+    const requiredSeconds = (aperture ** 2) / ((2 ** ev) * (iso / 100));
+    const limitSeconds = portraitShutterLimitSeconds(lensName);
+    const fastestAtF22 = (22 ** 2) / ((2 ** ev) * (iso / 100));
+    if (fastestAtF22 < 1 / 4000) {
+      return { allowed: false, reason: "bright", requiredSeconds: fastestAtF22, limitSeconds, aperture: 22, iso };
+    }
+    if (requiredSeconds > limitSeconds * 1.05) {
+      return { allowed: false, reason: "dark", requiredSeconds, limitSeconds, aperture, iso };
+    }
+    return { allowed: true, reason: "", requiredSeconds, limitSeconds, aperture, iso };
+  }
+
   function allowedLensNamesForTerrain() {
     if (state.specialShotMode === "macro") return new Set(["Makró"]);
     if (state.specialShotMode === "supertele") return new Set(["Szupertele"]);
@@ -4437,7 +4509,7 @@
         elements.lensEffectGrid = effectWrapper;
       }
       const wrapper = document.createElement("div");
-      wrapper.innerHTML = `<label class="field-label" for="photo-${key}">${label}</label><select id="photo-${key}" data-photo-key="${key}"></select>${key === "objektiv" ? '<small class="control-help">A tájhoz nem illő objektívek inaktívak.</small>' : ""}`;
+      wrapper.innerHTML = `<label class="field-label" for="photo-${key}">${label}</label><select id="photo-${key}" data-photo-key="${key}"></select>${key === "film" ? '<small class="control-help" id="filmCompatibilityStatus">A fényviszonyokkal, a valós filmérzékenységgel és a szükséges záridővel nem összeegyeztethető filmek inaktívak.</small>' : key === "objektiv" ? '<small class="control-help">A tájhoz nem illő objektívek inaktívak.</small>' : ""}`;
       elements.photoFields.appendChild(wrapper);
     });
     renderPhotoSelects();
@@ -4448,6 +4520,43 @@
     if (!elements.photoFields) return;
     const filmField = PHOTO_FIELDS.find(([key]) => key === "film");
     populateSelect(photoSelect("film"), filmField, availableFilmRows(), state.photo.film || "", "photo");
+    const filmSelect = photoSelect("film");
+    Array.from(filmSelect?.options || []).forEach((option) => {
+      if (!option.value) return;
+      const film = findRow(filmField, option.value);
+      const compatibility = filmLightCompatibility(film);
+      option.disabled = !compatibility.allowed;
+      if (!compatibility.allowed) {
+        const isEnglish = window.I18N?.language === "en";
+        option.textContent += isEnglish
+          ? compatibility.reason === "style" ? " — B/W film required" : compatibility.reason === "bright" ? " — too much light" : " — insufficient light"
+          : compatibility.reason === "style" ? " — B/W film szükséges" : compatibility.reason === "bright" ? " — túl erős fény" : " — kevés fény";
+        option.title = compatibility.reason === "style"
+          ? "A hagyományos szépia tónusozás fekete-fehér ezüstalapú képből készül, ezért ehhez B/W film szükséges."
+          : compatibility.reason === "bright"
+          ? `A névleges ISO ${compatibility.iso} érzékenységgel még f/22 és 1/4000 s mellett is túlexponálódna.`
+          : `ISO ${compatibility.iso} és f/${compatibility.aperture} mellett körülbelül ${formatShutter(compatibility.requiredSeconds)} kellene; a portré határa ${formatShutter(compatibility.limitSeconds)}.`;
+      }
+    });
+    const selectableFilms = Array.from(filmSelect?.options || []).filter((option) => option.value && !option.disabled);
+    const compatibilityStatus = byId("filmCompatibilityStatus");
+    if (!selectableFilms.length) {
+      state.photo.film = "";
+      if (filmSelect) filmSelect.value = "";
+      if (compatibilityStatus) {
+        compatibilityStatus.classList.add("error");
+        compatibilityStatus.textContent = window.I18N?.language === "en"
+          ? "Error: no analog film is viable at box speed in the current conditions. An automatic film-neutral photo prompt will be generated."
+          : "Hiba: a jelenlegi körülmények között egyetlen analóg film sem használható névleges érzékenységen. Automatikus, filmsemleges fotóprompt készül.";
+      }
+    } else if (compatibilityStatus) {
+      compatibilityStatus.classList.remove("error");
+    }
+    const selectedFilm = findRow(filmField, state.photo.film);
+    if (selectedFilm && !filmLightCompatibility(selectedFilm).allowed && !isFieldLocked("photo.film")) {
+      state.photo.film = "";
+      if (filmSelect) filmSelect.value = "";
+    }
     PHOTO_FIELDS.filter(([key]) => key !== "film").forEach((field) => {
       const selectedValue = field[0] === "objektiv"
         ? (isFieldLocked("photo.objektiv") ? state.photo.objektiv : compatibleLensName(state.photo.objektiv))
@@ -5221,9 +5330,7 @@
   }
 
   function selectedFilmIso() {
-    if (FILM_ISO_VALUES[state.photo.film]) return FILM_ISO_VALUES[state.photo.film];
-    const match = (state.photo.film || "").match(/(\d{2,4})(?:T)?$/i);
-    return match ? Number(match[1]) : null;
+    return filmIsoValue(state.photo.film);
   }
 
   function filmPromptForContext(film, { standalone = false } = {}) {
@@ -5238,29 +5345,67 @@
     return prompt.replace(/^landscape photography\b/i, "environmental portrait photography");
   }
 
+  function automaticFilmFallbackPrompt() {
+    const hasCompatibleFilm = availableFilmRows().some((film) => filmLightCompatibility(film).allowed);
+    return hasCompatibleFilm
+      ? "neutral photographic capture without a selected film stock"
+      : "automatic exposure fallback because no listed analog film is viable at box speed, film-neutral photorealistic capture without a falsely claimed film stock";
+  }
+
+  function motionRenderingPrompt({ standalone = false } = {}) {
+    return standalone
+      ? "subtle natural motion blur is acceptable in moving pedestrians, passing vehicles, flowing water and wind-moved foliage, no multi-second light trails, no heavy long-exposure ghosting"
+      : "primary model, face and eyes remain sharp and stable, subtle natural motion blur may appear only in secondary background pedestrians, passing vehicles and wind-moved foliage, no motion ghosting on the primary subject, no multi-second light trails";
+  }
+
   function formatShutter(seconds) {
     if (seconds >= 1) return `${Number(seconds.toFixed(1)).toLocaleString("hu-HU")} s`;
     return `1/${Math.round(1 / seconds)} s`;
   }
 
-  function computeCameraSettings() {
+  function sceneExposureEv() {
     const weather = activeWeather();
     const direction = activeDirection();
     const interiorSourceEv = ({ window: naturalBaseEv() - 1, ceiling: 7, studio: 10, practical: 5, mixed: 8 })[state.interiorLightSource] ?? 7;
     const interiorCharacterModifier = ({ soft: -0.5, even: 0.5, directional: 0, low_key: -2 })[state.interiorLightCharacter] ?? 0;
     const exteriorWeatherInfluence = ["window", "mixed"].includes(state.interiorLightSource) ? Number(weather.ev_modifier || 0) * 0.5 : 0;
-    const ev = state.environmentMode === "interior"
+    return state.environmentMode === "interior"
       ? Math.max(-8, Math.min(16, interiorSourceEv + interiorCharacterModifier + exteriorWeatherInfluence))
       : Math.max(-8, Math.min(16, naturalBaseEv() + Number(weather.ev_modifier || 0) + terrain().light - Number(direction.exposure_compensation || 0)));
-    const iso = selectedFilmIso() || (ev < 0 ? 1600 : ev < 7 ? 800 : ev < 12 ? 400 : 100);
+  }
+
+  function automaticCaptureIso(ev, aperture, shutterLimit) {
+    const requiredIso = 100 * (aperture ** 2) / ((2 ** ev) * shutterLimit);
+    const values = [50, 100, 200, 400, 800, 1600, 3200, 6400, 12800];
+    return values.find((value) => value >= requiredIso) || values[values.length - 1];
+  }
+
+  function closestAperture(value, minimum = 1.4) {
+    const values = APERTURES.filter((aperture) => aperture >= minimum);
+    return values.reduce((closest, aperture) => Math.abs(aperture - value) < Math.abs(closest - value) ? aperture : closest);
+  }
+
+  function computeCameraSettings({ standalone = false } = {}) {
+    const ev = sceneExposureEv();
+    const lensName = compatibleLensName() || "Standard";
     const automaticAperture = ev >= 14 ? 8 : ev >= 11 ? 5.6 : ev >= 8 ? 4 : ev >= 5 ? 2.8 : ev >= 1 ? 2 : 1.8;
-    const preferredAperture = LENS_APERTURE_TARGETS[compatibleLensName()] || automaticAperture;
+    const preferredAperture = LENS_APERTURE_TARGETS[lensName] || automaticAperture;
+    const widestAperture = LENS_MAX_APERTURES[lensName] || 2.8;
     const sunstarSelected = selectedLensEffects().some((effect) => effect.key === "sunstar");
-    const targetAperture = sunstarSelected ? 11 : ev < 5 ? Math.min(preferredAperture, 2.8) : ev < 9 ? Math.min(preferredAperture, 4) : preferredAperture;
-    const exactSeconds = (targetAperture ** 2) / ((2 ** ev) * (iso / 100));
-    const seconds = SHUTTER_SPEEDS.reduce((closest, value) => Math.abs(value - exactSeconds) < Math.abs(closest - exactSeconds) ? value : closest);
-    const rawAperture = Math.sqrt(seconds * (2 ** ev) * (iso / 100));
-    const aperture = sunstarSelected ? 11 : APERTURES.reduce((closest, value) => Math.abs(value - rawAperture) < Math.abs(closest - rawAperture) ? value : closest);
+    const shutterLimit = standalone ? 1 / 15 : portraitShutterLimitSeconds(lensName);
+    let targetAperture = sunstarSelected ? 11 : ev < 5 ? Math.min(preferredAperture, 2.8) : ev < 9 ? Math.min(preferredAperture, 4) : preferredAperture;
+    let iso = selectedFilmIso();
+    if (!iso) iso = automaticCaptureIso(ev, targetAperture, shutterLimit);
+    let exactSeconds = (targetAperture ** 2) / ((2 ** ev) * (iso / 100));
+    if (!sunstarSelected && exactSeconds > shutterLimit) {
+      const apertureAtLimit = Math.sqrt(shutterLimit * (2 ** ev) * (iso / 100));
+      targetAperture = Math.max(widestAperture, Math.min(targetAperture, apertureAtLimit));
+    }
+    const aperture = sunstarSelected ? 11 : closestAperture(targetAperture, widestAperture);
+    exactSeconds = (aperture ** 2) / ((2 ** ev) * (iso / 100));
+    const permittedShutters = SHUTTER_SPEEDS.filter((value) => value <= shutterLimit);
+    const seconds = permittedShutters.reduce((closest, value) => Math.abs(value - exactSeconds) < Math.abs(closest - exactSeconds) ? value : closest);
+    const exposureLimited = exactSeconds > shutterLimit * 1.05;
     const daypart = daypartForTime().key;
     const kelvin = state.environmentMode === "interior"
       ? ({ warm: 3200, neutral: 4000, daylight: 5600, mixed: 4300 })[state.interiorColorTemperature] || 5600
@@ -5270,7 +5415,7 @@
           : ["rain", "storm"].includes(state.weatherKey) ? 7200
             : state.weatherKey === "cloud" ? 6800
               : state.weatherKey === "snow" ? 6800 : 5600;
-    return { ev, iso, shutter: formatShutter(seconds), aperture, kelvin, prompt: `${formatShutter(seconds)}, f/${aperture}, ISO ${iso}, ${kelvin} K white balance` };
+    return { ev, iso, seconds, shutter: formatShutter(seconds), aperture, kelvin, exposureLimited, shutterLimit, prompt: `${formatShutter(seconds)}, f/${aperture}, ISO ${iso}, ${kelvin} K white balance` };
   }
 
   function orientationPrompt() {
@@ -5542,7 +5687,7 @@
   }
 
   function generatedPhotoPrompt({ modelFocus = false, standalone = false } = {}) {
-    const camera = computeCameraSettings();
+    const camera = computeCameraSettings({ standalone });
     const film = findRow(PHOTO_FIELDS.find(([key]) => key === "film"), state.photo.film);
     const lensName = compatibleLensName();
     const lens = findRow(PHOTO_FIELDS.find(([key]) => key === "objektiv"), lensName);
@@ -5558,7 +5703,8 @@
     if (!effectPrompts.length) effectPrompts.push("natural clean optical rendering, no added stylized optical effect");
     return sanitizePrompt([
       camera.prompt,
-      filmPromptForContext(film, { standalone }),
+      filmPromptForContext(film, { standalone }) || automaticFilmFallbackPrompt(),
+      motionRenderingPrompt({ standalone }),
       LENS_BASE_PROMPTS[lensName] || lens?.leiras,
       lensRendering,
       ...effectPrompts,
@@ -5811,16 +5957,19 @@
   function randomizePhoto() {
     flushHistoryRecord();
     renderPhotoSelects();
-    if (!isFieldLocked("photo.film")) selectRandom(photoSelect("film"));
     if (!isFieldLocked("photo.objektiv")) selectRandom(photoSelect("objektiv"), ["Portré", "Nagylátószögű", "Prime objektív"]);
     if (!isFieldLocked("photo.stilus")) selectRandom(photoSelect("stilus"), PHOTO_STYLE_DEFAULTS);
-    readPhotoControlsToState();
+    state.photo.objektiv = photoSelect("objektiv")?.value || state.photo.objektiv;
+    state.photo.stilus = photoSelect("stilus")?.value || state.photo.stilus;
     state.photo.effects = [];
     if (Math.random() < 0.65) {
       const shuffled = [...LENS_LIGHT_EFFECTS].sort(() => Math.random() - 0.5);
       state.photo.effects = shuffled.slice(0, 1).map((effect) => effect.key);
     }
     renderLensEffects();
+    renderPhotoSelects();
+    if (!isFieldLocked("photo.film")) selectRandom(photoSelect("film"));
+    readPhotoControlsToState();
     updateAll({ history: "immediate" });
   }
 
@@ -6562,12 +6711,14 @@
       if (event.target.matches("[data-lens-effect-slot]")) {
         state.photo.effects = event.target.value ? [event.target.value] : [];
         renderLensEffects();
+        renderPhotoSelects();
         updateAll();
         return;
       }
       const key = event.target.dataset.photoKey;
       if (!key) return;
       state.photo[key] = event.target.value;
+      if (["objektiv", "stilus"].includes(key)) renderPhotoSelects();
       updateAll();
     });
 

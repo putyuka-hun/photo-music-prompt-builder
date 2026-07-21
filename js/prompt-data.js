@@ -7544,6 +7544,10 @@ window.PROMPT_GENERATOR_DATA = {
       "leiras": "retro colors, faded film, nostalgic, analog grain"
     },
     {
+      "stilus": "Szépia",
+      "leiras": "authentic sepia-toned black and white photograph, warm brown archival print tones, traditional darkroom toning"
+    },
+    {
       "stilus": "Rézkarc / metszet",
       "leiras": "etching, engraving, fine lines"
     },

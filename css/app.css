@@ -1851,6 +1851,11 @@ button {
   font-size: 11px;
 }
 
+.control-help.error {
+  color: #ef8f82;
+  font-weight: 700;
+}
+
 .special-shot-control small {
   margin-top: 4px;
   color: var(--muted);
