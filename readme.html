@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#171919">
   <meta name="description" content="Photo & Music Prompt Builder bilingual user guide">
   <title>Útmutató · Photo & Music Prompt Builder</title>
-  <link rel="stylesheet" href="css/app.css?v=20260721-4">
+  <link rel="stylesheet" href="css/app.css?v=20260721-7">
 </head>
 <body data-page="guide" id="guide-top">
   <header class="topbar">
@@ -232,5 +232,21 @@
     <a class="guide-back-top" href="#guide-top" aria-label="Oldal tetejére / Back to top"><span aria-hidden="true">↑</span><strong lang="hu">Oldal tetejére</strong><strong lang="en">Back to top</strong></a>
   </main>
   <script src="js/i18n.js?v=20260721-1"></script>
+  <script>
+    (() => {
+      const syncGuideAnchorOffset = () => {
+        const language = document.documentElement.lang === "en" ? "en" : "hu";
+        const quickStart = document.querySelector(`.guide-language-section[lang="${language}"] .guide-grid > .guide-card.guide-wide:first-child`);
+        if (!quickStart || window.matchMedia("(max-width: 900px)").matches) {
+          document.documentElement.style.removeProperty("--guide-anchor-offset");
+          return;
+        }
+        document.documentElement.style.setProperty("--guide-anchor-offset", `${Math.ceil(quickStart.getBoundingClientRect().height + 18)}px`);
+      };
+      window.addEventListener("resize", syncGuideAnchorOffset, { passive: true });
+      window.addEventListener("promptbuilder:languagechange", () => requestAnimationFrame(syncGuideAnchorOffset));
+      requestAnimationFrame(syncGuideAnchorOffset);
+    })();
+  </script>
 </body>
 </html>
