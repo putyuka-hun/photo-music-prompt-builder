@@ -1971,9 +1971,10 @@ button.crowd-presence-button[aria-checked="true"] {
 }
 
 .lens-effect-control {
-  margin-top: 14px;
-  padding: 14px;
-  background: #181d1c;
+  margin-top: 18px;
+  padding: 16px 0 0;
+  border-top: 1px solid var(--line);
+  background: transparent;
 }
 
 .lens-effect-control > header {
@@ -1991,7 +1992,7 @@ button.crowd-presence-button[aria-checked="true"] {
 
 .lens-effect-control strong {
   color: #e7e9e5;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
 }
 
@@ -2007,9 +2008,9 @@ button.crowd-presence-button[aria-checked="true"] {
 }
 
 .lens-effect-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+  display: block;
+  min-width: 0;
+  width: auto;
 }
 
 .lens-effect-field {
@@ -2018,18 +2019,97 @@ button.crowd-presence-button[aria-checked="true"] {
 }
 
 .lens-effect-field > span {
-  color: #bfc5c2;
-  font-size: 12px;
+  color: var(--muted);
+  font-size: 11px;
 }
 
 .lens-effect-field select {
-  min-height: 44px;
+  min-height: 42px;
   width: 100%;
-  border: 1px solid rgba(79, 201, 183, 0.24);
+  padding: 0 11px;
+  border: 0;
   border-radius: 0;
-  background: #252b2a;
-  color: #eef1ee;
+  background: var(--surface);
+  color: var(--text);
   font-family: "TeleNeo Office", Arial, sans-serif;
+}
+
+.lens-effect-input-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 42px;
+  gap: 8px;
+}
+
+.lens-effect-info {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 0;
+  background: #193a36;
+  color: #59d8c5;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.lens-effect-info:hover {
+  background: #245e56;
+  color: #fff;
+}
+
+.lens-effect-dialog {
+  width: min(520px, calc(100vw - 32px));
+  padding: 0;
+  border: 1px solid rgba(79, 201, 183, 0.42);
+  border-radius: 0;
+  background: #202525;
+  color: var(--text);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.62);
+}
+
+.lens-effect-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(3px);
+}
+
+.lens-effect-dialog form {
+  padding: 20px;
+}
+
+.lens-effect-dialog header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.lens-effect-dialog h3,
+.lens-effect-dialog p {
+  margin: 0;
+}
+
+.lens-effect-dialog h3 {
+  color: var(--text-strong);
+  font-size: 18px;
+}
+
+.lens-effect-dialog p {
+  margin-top: 16px;
+  color: #b8bfbb;
+  line-height: 1.6;
+}
+
+.lens-effect-dialog header button {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 0;
+  background: #193a36;
+  color: #59d8c5;
+  font-size: 22px;
+  cursor: pointer;
 }
 
 button.lens-effect-button {
@@ -2085,9 +2165,6 @@ button.lens-effect-button[aria-pressed="true"] {
     display: grid;
   }
 
-  .lens-effect-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (max-width: 1100px) {
@@ -2576,6 +2653,22 @@ button.model-third-button[aria-checked="true"] {
 
 .control-grid.compact {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.photo-control-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (max-width: 1100px) {
+  .photo-control-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .photo-control-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .film-preview {
