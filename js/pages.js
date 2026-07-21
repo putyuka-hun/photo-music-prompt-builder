@@ -1174,6 +1174,22 @@
     ["stilus", "Képi stílus", "tbl_stilus", "stilus", "leiras"]
   ];
 
+  const MAX_LENS_EFFECTS = 2;
+  const LENS_LIGHT_EFFECTS = [
+    { key: "lens_flare", labelHu: "Lens flare", labelEn: "Lens flare", hintHu: "Természetes lencsebecsillanás látható vagy egyértelműen indokolt erős fényforrásból.", hintEn: "Natural lens flare from a visible or strongly motivated bright light source.", prompt: "subtle physically plausible lens flare from a visible or strongly motivated light source, controlled contrast, no oversized artificial flare" },
+    { key: "anamorphic_flare", labelHu: "Anamorf flare", labelEn: "Anamorphic flare", hintHu: "Visszafogott vízszintes filmes fénycsík erős gyakorlati fények mentén.", hintEn: "Restrained horizontal cinematic light streak aligned with bright practical lights.", prompt: "restrained horizontal anamorphic lens flare aligned with bright practical lights, cinematic optical streak, no excessive science-fiction glow" },
+    { key: "sunstar", labelHu: "Fénycsillag", labelEn: "Sunstar", hintHu: "Csillagszerű diffrakciós sugarak kis, intenzív fényforrásokon.", hintEn: "Star-shaped diffraction rays on small, intense light sources.", prompt: "natural aperture starburst on small intense light sources, crisp diffraction rays, physically plausible exposure" },
+    { key: "light_leak", labelHu: "Fényszivárgás", labelEn: "Light leak", hintHu: "Finom analóg fényszivárgás a kép egyik szélén, meleg organikus elszíneződéssel.", hintEn: "Subtle analogue light leak near one frame edge with warm organic colour bleed.", prompt: "subtle analogue film light leak near one frame edge, organic warm colour bleed, restrained coverage" },
+    { key: "halation", labelHu: "Halation", labelEn: "Halation", hintHu: "Finom vöröses filmes fényudvar az erős csúcsfények körül.", hintEn: "Subtle warm reddish film halo around intense highlights.", prompt: "subtle film halation around intense highlights, fine warm reddish glow without loss of detail" },
+    { key: "bloom", labelHu: "Bloom", labelEn: "Bloom", hintHu: "Lágyan ragyogó csúcsfények, megőrzött középtónusokkal és részletekkel.", hintEn: "Softly glowing highlights with preserved midtones and critical detail.", prompt: "gentle highlight bloom with soft luminous roll-off, preserved midtone contrast and critical subject detail" },
+    { key: "ghosting", labelHu: "Optikai ghosting", labelEn: "Optical ghosting", hintHu: "Kevés, áttetsző lencsetag-tükröződés egy indokolt erős fényforrásból.", hintEn: "Sparse translucent lens-element reflections from a motivated bright source.", prompt: "subtle lens-element ghosting from a motivated bright source, sparse translucent reflections, physically plausible placement" },
+    { key: "soft_diffusion", labelHu: "Lágy diffúzió", labelEn: "Soft diffusion", hintHu: "Enyhe diffúziós szűrőhatás, lágyabb csúcsfényekkel, de megmaradó fontos részletekkel.", hintEn: "Mild diffusion-filter effect with softer highlights while retaining critical detail.", prompt: "mild optical diffusion filter effect, softened highlight roll-off and gentle skin rendering while retaining critical detail" },
+    { key: "chromatic_aberration", labelHu: "Kromatikus aberráció", labelEn: "Chromatic aberration", hintHu: "Nagyon enyhe színhiba kizárólag a képszéli, kontrasztos éleken.", hintEn: "Very subtle colour fringing confined to high-contrast frame edges.", prompt: "very subtle lateral chromatic aberration confined to high-contrast frame edges, natural optical imperfection" },
+    { key: "vignette", labelHu: "Vignetta", labelEn: "Vignette", hintHu: "Finom, természetes optikai peremsötétedés a téma visszafogott kiemelésére.", hintEn: "Subtle natural corner darkening for unobtrusive subject emphasis.", prompt: "subtle natural optical vignetting toward the frame corners, unobtrusive subject emphasis" },
+    { key: "bokeh_highlights", labelHu: "Bokeh fények", labelEn: "Bokeh highlights", hintHu: "Az objektívhez és rekeszhez illő, organikus életlen fényfoltok.", hintEn: "Organic defocused highlights shaped by the selected lens and aperture.", prompt: "organic optical bokeh highlights shaped by the selected lens and aperture, varied size and natural depth" },
+    { key: "volumetric_rays", labelHu: "Volumetrikus sugarak", labelEn: "Volumetric rays", hintHu: "A fényiránnyal egyező sugarak kizárólag indokolt ködben, párában vagy porban.", hintEn: "Light rays coherent with the selected direction, visible only in plausible haze, mist or dust.", prompt: "soft volumetric light rays visible only through plausible haze, dust or mist, coherent with the selected light direction" }
+  ];
+
   const FILM_PREVIEW_SOURCE = "assets/film/film_reference.png";
   const FILM_PREVIEW_SOURCES = {
     "Fuji Provia 100F": "assets/film/stocks/fuji-provia-100f.png",
@@ -2581,6 +2597,8 @@
     temperatureCorrectionLabel: byId("temperatureCorrectionLabel"),
     customOutfit: byId("customOutfit"),
     photoFields: byId("photoFields"),
+    lensEffectGrid: byId("lensEffectGrid"),
+    lensEffectCount: byId("lensEffectCount"),
     filmPreviewCanvas: byId("filmPreviewCanvas"),
     filmPreviewLeft: byId("filmPreviewLeft"),
     filmPreviewRight: byId("filmPreviewRight"),
@@ -2636,7 +2654,7 @@
   function defaultState() {
     return {
       face: {},
-      photo: {},
+      photo: { effects: [] },
       orientation: "Portré / álló (4:5)",
       modelThird: "center",
       faceBackground: "",
@@ -2679,7 +2697,13 @@
           ? value.face.arcjegyek
           : value.face?.arcjegyek ? [value.face.arcjegyek] : [])
       },
-      photo: { ...base.photo, ...(value.photo || {}) },
+      photo: {
+        ...base.photo,
+        ...(value.photo || {}),
+        effects: Array.isArray(value.photo?.effects)
+          ? value.photo.effects.filter((key) => LENS_LIGHT_EFFECTS.some((effect) => effect.key === key)).slice(0, MAX_LENS_EFFECTS)
+          : []
+      },
       environmentElementIds: Array.isArray(value.environmentElementIds) ? value.environmentElementIds : base.environmentElementIds,
       lockedFields: value.lockedFields && typeof value.lockedFields === "object" ? { ...value.lockedFields } : {}
     };
@@ -4424,6 +4448,32 @@
     });
   }
 
+  function selectedLensEffects() {
+    const selected = Array.isArray(state.photo.effects) ? state.photo.effects : [];
+    return selected
+      .map((key) => LENS_LIGHT_EFFECTS.find((effect) => effect.key === key))
+      .filter(Boolean)
+      .slice(0, MAX_LENS_EFFECTS);
+  }
+
+  function renderLensEffects() {
+    if (!elements.lensEffectGrid) return;
+    const isEnglish = window.I18N?.language === "en";
+    const selected = selectedLensEffects();
+    const selectedKeys = new Set(selected.map((effect) => effect.key));
+    elements.lensEffectGrid.innerHTML = LENS_LIGHT_EFFECTS.map((effect, index) => {
+      const active = selectedKeys.has(effect.key);
+      const label = isEnglish ? effect.labelEn : effect.labelHu;
+      const hint = isEnglish ? effect.hintEn : effect.hintHu;
+      return `<button class="lens-effect-button${active ? " selected" : ""}" type="button" data-lens-effect-key="${effect.key}" aria-pressed="${active}" aria-label="${label}: ${hint}" title="${hint}" data-i18n-skip><span>${String(index + 1).padStart(2, "0")}</span><strong>${label}</strong></button>`;
+    }).join("");
+    if (elements.lensEffectCount) {
+      elements.lensEffectCount.textContent = isEnglish
+        ? `${selected.length}/${MAX_LENS_EFFECTS} selected`
+        : `${selected.length}/${MAX_LENS_EFFECTS} kiválasztva`;
+    }
+  }
+
   function filmPreviewProfile(filmName) {
     return FILM_PREVIEW_PROFILES[filmName] || {
       saturation: 1,
@@ -5349,11 +5399,13 @@
     const lensRendering = lensName === "Szupertele" && modelFocus
       ? "strong telephoto compression, selected model as the unequivocal primary focus, tack-sharp eyes and natural facial detail, controlled background defocus with retained organic terrain texture, no synthetic blur"
       : LENS_RENDERING_PROFILES[lensName];
+    const effectPrompts = selectedLensEffects().map((effect) => effect.prompt);
     return sanitizePrompt([
       camera.prompt,
       film?.filmtipus_prompt,
       LENS_BASE_PROMPTS[lensName] || lens?.leiras,
       lensRendering,
+      ...effectPrompts,
       stylePrompt,
       finishPrompt
     ]);
@@ -5607,6 +5659,12 @@
     if (!isFieldLocked("photo.objektiv")) selectRandom(photoSelect("objektiv"), ["Portré", "Nagylátószögű", "Prime objektív"]);
     if (!isFieldLocked("photo.stilus")) selectRandom(photoSelect("stilus"), PHOTO_STYLE_DEFAULTS);
     readPhotoControlsToState();
+    state.photo.effects = [];
+    if (Math.random() < 0.65) {
+      const shuffled = [...LENS_LIGHT_EFFECTS].sort(() => Math.random() - 0.5);
+      state.photo.effects = shuffled.slice(0, Math.random() < 0.28 ? 2 : 1).map((effect) => effect.key);
+    }
+    renderLensEffects();
     updateAll({ history: "immediate" });
   }
 
@@ -6351,6 +6409,22 @@
       updateAll();
     });
 
+    elements.lensEffectGrid?.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-lens-effect-key]");
+      if (!button) return;
+      const key = button.dataset.lensEffectKey;
+      const selected = selectedLensEffects().map((effect) => effect.key);
+      const existingIndex = selected.indexOf(key);
+      if (existingIndex >= 0) selected.splice(existingIndex, 1);
+      else if (selected.length >= MAX_LENS_EFFECTS) {
+        showToast(window.I18N?.language === "en" ? "Choose no more than two effects" : "Legfeljebb két effektus választható");
+        return;
+      } else selected.push(key);
+      state.photo.effects = selected;
+      renderLensEffects();
+      updateAll();
+    });
+
     byId("randomAiPortrait")?.addEventListener("click", () => generateAiPortrait({ hybrid: false }));
     byId("randomHybridPortrait")?.addEventListener("click", () => generateAiPortrait({ hybrid: true }));
     byId("randomFace")?.addEventListener("click", randomizeFace);
@@ -6415,6 +6489,7 @@
     renderWindDirectionControls();
     renderLightDirectionSelect();
     renderPhotoFields();
+    renderLensEffects();
     renderSavedCharacters();
   }
 
@@ -6491,6 +6566,7 @@
       renderTerrainGrid();
       renderEnvironmentElements();
       renderCrowdPresenceOptions();
+      renderLensEffects();
       renderSummary();
       window.I18N?.apply(document.body);
     });
